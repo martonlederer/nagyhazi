@@ -18,6 +18,13 @@ typedef struct MenuItem {
 } MenuItem;
 
 /**
+ * A menü láncolt listához ad elemet
+ * @param list Láncolt lista első elemére mutató pointer
+ * @param item Új elem
+ */
+void addToMenu(MenuItem *list, MenuItem *item);
+
+/**
  * A menü betöltését elvégző funkció
  * @param firstItem A menü láncolt listájának első elemére mutató pointer
  */

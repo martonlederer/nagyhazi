@@ -10,12 +10,32 @@ typedef struct MenuItem {
     struct MenuItem *next;
 } MenuItem;
 
+// Menü láncolt lista management
+
+/**
+ * A menü láncolt listához ad elemet
+ * @param list Láncolt lista első elemére mutató pointer
+ * @param item Új elem
+ */
+void addToMenu(MenuItem *list, MenuItem *item) {
+    MenuItem *current = list;
+
+    // megkeressük az utolsó elemet
+    while (current->next != NULL)
+        current = current->next;
+
+    // linkelés
+    current->next = item;
+}
+
+// Menü mentésére szolgáló funkciók
+
 /**
  * A menü betöltését elvégző funkció
  * @param firstItem A menü láncolt listájának első elemére mutató pointer
  */
 void loadMenu(MenuItem *firstItem) {
-    FILE *f = fopen("menu.txt", "r");
+    FILE *f = fopen("./menu.txt", "r");
 
     // ha még nincs menü, a fájl nem létezik
     if (f == NULL) {

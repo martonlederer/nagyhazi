@@ -1,10 +1,23 @@
 #include <stdio.h>
 #include "menu.h"
 
-int main(int argc, char *argv[]) {
+int main(int argc, char **argv) {
     MenuItem *menu = (MenuItem*) malloc(sizeof(MenuItem));
-    loadMenu(menu);
-    printf("%s %d", menu->name, menu->price);
+
+    *menu = (MenuItem) {
+        "Teszt",
+        15,
+        NULL
+    };
+    MenuItem kett = {
+            "Teszt2",
+            15,
+            NULL
+    };
+
+    addToMenu(menu, &kett);
+
+    printf("%s %s", menu->name, menu->next->name);
 
     // TODO: init program setup
     // request initial data:
