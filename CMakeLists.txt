@@ -7,4 +7,5 @@ add_executable(nagyhazi main.c
         menu.c
         commands.c
         table.c
-        gui.c)
+        gui.c
+        menu.h)

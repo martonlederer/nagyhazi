@@ -1,11 +1,10 @@
 #include <stdio.h>
+#include "menu.h"
 
 int main(int argc, char *argv[]) {
-    printf("You have entered %d arguments:\n", argc);
-
-    for (int i = 0; i < argc; i++) {
-        printf("%s\n", argv[i]);
-    }
+    MenuItem *menu = (MenuItem*) malloc(sizeof(MenuItem));
+    loadMenu(menu);
+    printf("%s %d", menu->name, menu->price);
 
     // TODO: init program setup
     // request initial data:
