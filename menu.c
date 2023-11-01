@@ -69,29 +69,50 @@ MenuItem *removeFromMenu(MenuItem *list, char *itemName) {
 
 /**
  * A menü betöltését elvégző funkció
- * @param firstItem A menü láncolt listájának első elemére mutató pointer
+ * @param list A menü láncolt listájának első elemére mutató pointer
  */
-void loadMenu(MenuItem *firstItem) {
+void loadMenu(MenuItem *list) {
     FILE *f = fopen("./menu.txt", "r");
 
     // ha még nincs menü, a fájl nem létezik
-    if (f == NULL) {
-        firstItem = NULL;
-        return;
-    }
+    if (f == NULL) return;
 
     // aktuális elemek
     MenuItem *current = (MenuItem*) malloc(sizeof(MenuItem));
-    MenuItem *last = firstItem;
+    MenuItem *previous = list;
 
     // elemek beolvasása a láncolt listába a fájlból
-    fscanf(f, "%[^\\t] %d", last->name, &last->price);
+    fscanf(f, "%[^\\t] %d", previous->name, &previous->price);
 
     while (fscanf(f, "%[^\\t] %d", current->name, &current->price) == 2) {
-        last->next = current;
-        last = current;
+        previous->next = current;
+        previous = current;
     }
 
     // fájl bezárása
+    fclose(f);
+}
+
+/**
+ * A menü elmentését végző funkció
+ * @param list A menü láncolt listájának első elemére mutató pointer
+ */
+void saveMenu(MenuItem *list) {
+    FILE *f = fopen("./menu.txt", "w");
+    MenuItem *current = list;
+
+    if (f == NULL) {
+        perror("Hiba volt a fájl megnyitása közben.");
+        return;
+    }
+
+    // végigmegyünk a láncolt listán
+    while (current != NULL) {
+        // beírjuk a fájl egy új sorába a menü aktuális elemét
+        fprintf(f, "%s\t%d\n", current->name, current->price);
+        // következő elemre megyünk
+        current = current->next;
+    }
+
     fclose(f);
 }

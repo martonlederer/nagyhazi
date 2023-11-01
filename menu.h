@@ -26,9 +26,23 @@ typedef struct MenuItem {
 void addToMenu(MenuItem *list, MenuItem *item);
 
 /**
- * A menü betöltését elvégző funkció
- * @param firstItem A menü láncolt listájának első elemére mutató pointer
+ * A menü láncolt listából töröl egy elemet
+ * @param list Láncolt lista első elemére mutató pointer
+ * @param item Elem neve
+ * @returns A sorozat új első eleme
  */
-void loadMenu(MenuItem *firstItem);
+MenuItem *removeFromMenu(MenuItem *list, char *itemName);
 
-#endif NAGYHAZI_MENU_H
+/**
+ * A menü betöltését elvégző funkció
+ * @param list A menü láncolt listájának első elemére mutató pointer
+ */
+void loadMenu(MenuItem *list);
+
+/**
+ * A menü elmentését végző funkció
+ * @param list A menü láncolt listájának első elemére mutató pointer
+ */
+void saveMenu(MenuItem *list);
+
+#endif
