@@ -6,8 +6,8 @@
 #define NAGYHAZI_MENU_H
 
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
+#include "debugmalloc.h"
 
 /**
  * A menün szereplő étel struktúrája
@@ -32,6 +32,12 @@ void addToMenu(MenuItem *list, MenuItem *item);
  * @returns A sorozat új első eleme
  */
 MenuItem *removeFromMenu(MenuItem *list, char *itemName);
+
+/**
+ * Egy menü lista felszabadítására szolgáló funkció
+ * @param list Láncolt lista első elemére mutató pointer
+ */
+void freeMenu(MenuItem *list);
 
 /**
  * A menü betöltését elvégző funkció

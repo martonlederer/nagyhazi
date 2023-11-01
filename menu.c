@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
+#include "debugmalloc.h"
 
 /**
  * A menün szereplő étel struktúrája
@@ -63,6 +63,20 @@ MenuItem *removeFromMenu(MenuItem *list, char *itemName) {
     }
 
     return list;
+}
+
+/**
+ * Egy menü lista felszabadítására szolgáló funkció
+ * @param list Láncolt lista első elemére mutató pointer
+ */
+void freeMenu(MenuItem *list) {
+    MenuItem *curr = list;
+
+    while (list != NULL) {
+        curr = list;
+        list = list->next;
+        free(curr);
+    }
 }
 
 // Menü mentésére szolgáló funkciók

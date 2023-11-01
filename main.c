@@ -19,6 +19,7 @@ int main(int argc, char **argv) {
 
     printf("%s %s", menu->name, menu->next->name);
     saveMenu(menu);
+    freeMenu(menu);
 
     // TODO: init program setup
     // request initial data:
