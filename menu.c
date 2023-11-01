@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 /**
  * A menün szereplő étel struktúrája
@@ -26,6 +27,42 @@ void addToMenu(MenuItem *list, MenuItem *item) {
 
     // linkelés
     current->next = item;
+}
+
+/**
+ * A menü láncolt listából töröl egy elemet
+ * @param list Láncolt lista első elemére mutató pointer
+ * @param item Elem neve
+ * @returns A sorozat új első eleme
+ */
+MenuItem *removeFromMenu(MenuItem *list, char *itemName) {
+    MenuItem *current = list;
+
+    // az első elemet külön kezeljük
+    if (strcmp(current->name, itemName) == 0) {
+        return current->next;
+    }
+
+    while (current->next != NULL) {
+        // előző elem
+        MenuItem *previous = current;
+        current = current->next;
+
+        // megnézzük, hogy az elem neve
+        // egyezik a megadott névvel
+        if (strcmp(current->name, itemName) == 0) {
+            // az előzőt a következőhöz linkeljük
+            previous->next = current->next;
+
+            // felszabadítjuk az aktuális elemet
+            free(current);
+
+            // kilépünk a ciklusból
+            break;
+        }
+    }
+
+    return list;
 }
 
 // Menü mentésére szolgáló funkciók
