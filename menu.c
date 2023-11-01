@@ -2,6 +2,8 @@
 #include <string.h>
 #include "debugmalloc.h"
 
+// KÉRDÉS: használhatjuk-e a *void pointert adattípusként, így generikus láncolt listát készítve?
+
 /**
  * A menün szereplő étel struktúrája
  */
