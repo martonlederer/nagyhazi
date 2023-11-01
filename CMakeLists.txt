@@ -3,4 +3,8 @@ project(nagyhazi C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(nagyhazi main.c)
+add_executable(nagyhazi main.c
+        menu.c
+        commands.c
+        table.c
+        gui.c)
