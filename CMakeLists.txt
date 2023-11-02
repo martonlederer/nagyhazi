@@ -8,4 +8,6 @@ add_executable(nagyhazi main.c
         commands.c
         table.c
         gui.c
-        menu.h)
+        menu.h
+        linkedlist.c
+        linkedlist.h)

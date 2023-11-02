@@ -1,8 +1,6 @@
 #include <stdio.h>
-#include <string.h>
 #include "debugmalloc.h"
-
-// KÉRDÉS: használhatjuk-e a *void pointert adattípusként, így generikus láncolt listát készítve?
+#include "linkedlist.h"
 
 /**
  * A menün szereplő étel struktúrája
@@ -10,76 +8,7 @@
 typedef struct MenuItem {
     char *name;
     int price;
-    struct MenuItem *next;
 } MenuItem;
-
-// Menü láncolt lista management
-
-/**
- * A menü láncolt listához ad elemet
- * @param list Láncolt lista első elemére mutató pointer
- * @param item Új elem
- */
-void addToMenu(MenuItem *list, MenuItem *item) {
-    MenuItem *current = list;
-
-    // megkeressük az utolsó elemet
-    while (current->next != NULL)
-        current = current->next;
-
-    // linkelés
-    current->next = item;
-}
-
-/**
- * A menü láncolt listából töröl egy elemet
- * @param list Láncolt lista első elemére mutató pointer
- * @param item Elem neve
- * @returns A sorozat új első eleme
- */
-MenuItem *removeFromMenu(MenuItem *list, char *itemName) {
-    MenuItem *current = list;
-
-    // az első elemet külön kezeljük
-    if (strcmp(current->name, itemName) == 0) {
-        return current->next;
-    }
-
-    while (current->next != NULL) {
-        // előző elem
-        MenuItem *previous = current;
-        current = current->next;
-
-        // megnézzük, hogy az elem neve
-        // egyezik a megadott névvel
-        if (strcmp(current->name, itemName) == 0) {
-            // az előzőt a következőhöz linkeljük
-            previous->next = current->next;
-
-            // felszabadítjuk az aktuális elemet
-            free(current);
-
-            // kilépünk a ciklusból
-            break;
-        }
-    }
-
-    return list;
-}
-
-/**
- * Egy menü lista felszabadítására szolgáló funkció
- * @param list Láncolt lista első elemére mutató pointer
- */
-void freeMenu(MenuItem *list) {
-    MenuItem *curr = list;
-
-    while (list != NULL) {
-        curr = list;
-        list = list->next;
-        free(curr);
-    }
-}
 
 // Menü mentésére szolgáló funkciók
 
@@ -87,35 +16,42 @@ void freeMenu(MenuItem *list) {
  * A menü betöltését elvégző funkció
  * @param list A menü láncolt listájának első elemére mutató pointer
  */
-void loadMenu(MenuItem *list) {
+ListItem *loadMenu() {
     FILE *f = fopen("./menu.txt", "r");
 
     // ha még nincs menü, a fájl nem létezik
-    if (f == NULL) return;
+    if (f == NULL) return NULL;
 
-    // aktuális elemek
-    MenuItem *current = (MenuItem*) malloc(sizeof(MenuItem));
-    MenuItem *previous = list;
+    // aktuális elem
+    ListItem *list = NULL;
+    MenuItem current;
 
     // elemek beolvasása a láncolt listába a fájlból
-    fscanf(f, "%[^\\t] %d", previous->name, &previous->price);
+    while (fscanf(f, "%[^\\t] %d", current.name, &current.price) == 2) {
+        // memóriát adunk az új elemnek és
+        // megadjuk az értékét
+        MenuItem *newItem = (MenuItem*) malloc(sizeof(MenuItem));
+        *newItem = current;
 
-    while (fscanf(f, "%[^\\t] %d", current->name, &current->price) == 2) {
-        previous->next = current;
-        previous = current;
+        // TODO: string memória bővítés
+
+        // hozzáfűzés a listához
+        push(list, newItem);
     }
 
     // fájl bezárása
     fclose(f);
+
+    return list;
 }
 
 /**
  * A menü elmentését végző funkció
  * @param list A menü láncolt listájának első elemére mutató pointer
  */
-void saveMenu(MenuItem *list) {
+void saveMenu(ListItem *list) {
     FILE *f = fopen("./menu.txt", "w");
-    MenuItem *current = list;
+    ListItem *current = list;
 
     if (f == NULL) {
         perror("Hiba volt a fájl megnyitása közben.");
@@ -125,7 +61,9 @@ void saveMenu(MenuItem *list) {
     // végigmegyünk a láncolt listán
     while (current != NULL) {
         // beírjuk a fájl egy új sorába a menü aktuális elemét
-        fprintf(f, "%s\t%d\n", current->name, current->price);
+        MenuItem *item = (MenuItem*) current->data;
+        fprintf(f, "%s\t%d\n", item->name, item->price);
+
         // következő elemre megyünk
         current = current->next;
     }
