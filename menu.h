@@ -6,8 +6,8 @@
 #define NAGYHAZI_MENU_H
 
 #include <stdio.h>
-#include <string.h>
 #include "debugmalloc.h"
+#include "linkedlist.h"
 
 /**
  * A menün szereplő étel struktúrája
@@ -21,12 +21,17 @@ typedef struct MenuItem {
  * A menü betöltését elvégző funkció
  * @param list A menü láncolt listájának első elemére mutató pointer
  */
-void loadMenu(MenuItem *list);
+ListItem *loadMenu();
 
 /**
  * A menü elmentését végző funkció
  * @param list A menü láncolt listájának első elemére mutató pointer
  */
-void saveMenu(MenuItem *list);
+void saveMenu(ListItem *list);
+
+/**
+ * Felszabadítja a menü listát és az ételek neveit
+ */
+void freeMenu(ListItem *list);
 
 #endif

@@ -10,8 +10,6 @@ typedef struct MenuItem {
     int price;
 } MenuItem;
 
-// Menü mentésére szolgáló funkciók
-
 /**
  * A menü betöltését elvégző funkció
  * @param list A menü láncolt listájának első elemére mutató pointer
@@ -32,8 +30,6 @@ ListItem *loadMenu() {
         // megadjuk az értékét
         MenuItem *newItem = (MenuItem*) malloc(sizeof(MenuItem));
         *newItem = current;
-
-        // TODO: string memória bővítés
 
         // hozzáfűzés a listához
         push(list, newItem);
@@ -69,4 +65,23 @@ void saveMenu(ListItem *list) {
     }
 
     fclose(f);
+}
+
+/**
+ * Felszabadítja a menü listát és az ételek neveit
+ */
+void freeMenu(ListItem *list) {
+    ListItem *current = list;
+
+    while (current->next != NULL) {
+        // név felszabadítás
+        MenuItem *item = (MenuItem*) current->data;
+        free(item->name);
+
+        // következő elem
+        current = current->next;
+    }
+
+    // láncolt lista feszabadítás
+    freeList(list);
 }
