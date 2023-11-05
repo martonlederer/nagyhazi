@@ -1,14 +1,7 @@
 #include <stdio.h>
 #include "debugmalloc.h"
 #include "linkedlist.h"
-
-/**
- * A menün szereplő étel struktúrája
- */
-typedef struct MenuItem {
-    char *name;
-    int price;
-} MenuItem;
+#include "io.h"
 
 /**
  * A menü betöltését elvégző funkció
@@ -39,6 +32,20 @@ ListItem *loadMenu() {
     fclose(f);
 
     return list;
+}
+
+/**
+ * Rekurzív módon beolvassa menü fájl sorait.
+ * Ez azért szükséges, hogy dinamikusan megadhassuk
+ * a stringek hosszúságát.
+ */
+void readMenuLine() {
+    // név beolvasása
+    char *name = readString('\t');
+
+    // ár beolvasása
+    int price;
+    //fscanf("%d\n", &price);
 }
 
 /**

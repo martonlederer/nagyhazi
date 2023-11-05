@@ -64,7 +64,7 @@ char *readString(char end) {
  * @return A beolvasott string
  */
 char *readStringLine() {
-    return readString('\n');
+    return readString('\n', scanf);
 }
 
 /**

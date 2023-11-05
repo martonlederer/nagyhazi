@@ -28,7 +28,7 @@ void printWelcome();
  * @param end Karakter amit már nem szabad beolvasni
  * @return A beolvasott string
  */
-char *readString(char end);
+char *readString(char end, int scanner(const char*, ...));
 
 /**
  * Beolvas egy stringet, dinamikusan a következő sorig
