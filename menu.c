@@ -73,7 +73,7 @@ void saveMenu(ListItem *list) {
 void freeMenu(ListItem *list) {
     ListItem *current = list;
 
-    while (current->next != NULL) {
+    while (current != NULL) {
         // név felszabadítás
         MenuItem *item = (MenuItem*) current->data;
         free(item->name);

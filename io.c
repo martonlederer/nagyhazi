@@ -36,40 +36,27 @@ void printWelcome() {
  * @return A beolvasott string
  */
 char *readString(char end) {
-    typedef struct DinString {
-        char *data;
-        int size;
-    } DinString;
+    // string memória és méret
+    char *data = (char*) malloc(sizeof(char));
+    int size = 1;
+    *data = '\0';
 
-    DinString str = {
-            malloc(sizeof(char)),
-            1
-    };
-    str.data[0] = '\0';
-
+    // az éppen beolvasott char
     char curr_char;
-    char *old_string = str.data;
 
     // leolvassuk az összes karaktert
-    while (scanf("%c", &curr_char) == 1 && curr_char != end && str.size == 1) {
+    while (scanf("%c", &curr_char) == 1 && curr_char != end) {
         // str növelés
-        old_string = str.data;
-        str.data = malloc((str.size + 1) * sizeof(char));
+        data = (char*) realloc(data, (size + 1) * sizeof(char));
 
         // karaktermásolás
-        for (int i = 0; i < str.size; i++)
-            str.data[i] = old_string[i];
+        char charstring[2] = { curr_char, '\0' };
+        strcat(data, charstring);
 
-        // felszabadítás
-        free(old_string);
-
-        // új karakter hozzáadása
-        str.data[str.size - 1] = curr_char;
-        str.data[str.size] = '\0';
-        str.size++;
+        size++;
     }
 
-    return str.data;
+    return data;
 }
 
 /**
