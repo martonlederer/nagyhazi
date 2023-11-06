@@ -15,16 +15,29 @@ ListItem *loadMenu() {
 
     // aktuális elem
     ListItem *list = NULL;
-    MenuItem current;
+    char c = '\0';
 
     // elemek beolvasása a láncolt listába a fájlból
-    while (fscanf(f, "%[^\\t] %d", current.name, &current.price) == 2) {
-        // memóriát adunk az új elemnek és
-        // megadjuk az értékét
+    while (c != EOF) {
         MenuItem *newItem = (MenuItem*) malloc(sizeof(MenuItem));
-        *newItem = current;
 
-        // hozzáfűzés a listához
+        // init név
+        newItem->name = (char*) malloc(sizeof(char));
+        *newItem->name = '\0';
+
+        while (scanf("%c", &c) == 1 && c != '\t') {
+            // realloc
+            unsigned long newNameLen = strlen(newItem->name) + 2;
+            newItem->name = (char*) realloc(newItem->name, newNameLen * sizeof(char));
+
+            // karakter hozzáadása
+            newItem->name[newNameLen - 2] = c;
+            newItem->name[newNameLen - 1] = '\0';
+        }
+
+        // ár beolvasása
+        scanf("%d\n", &newItem->price);
+
         push(list, newItem);
     }
 
@@ -32,20 +45,6 @@ ListItem *loadMenu() {
     fclose(f);
 
     return list;
-}
-
-/**
- * Rekurzív módon beolvassa menü fájl sorait.
- * Ez azért szükséges, hogy dinamikusan megadhassuk
- * a stringek hosszúságát.
- */
-void readMenuLine() {
-    // név beolvasása
-    char *name = readString('\t');
-
-    // ár beolvasása
-    int price;
-    //fscanf("%d\n", &price);
 }
 
 /**
