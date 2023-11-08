@@ -13,4 +13,5 @@ add_executable(nagyhazi main.c
         linkedlist.h
         io.c
         io.h
+        table.h
 )

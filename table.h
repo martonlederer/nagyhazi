@@ -1,3 +1,6 @@
+#ifndef NAGYHAZI_TABLE_H
+#define NAGYHAZI_TABLE_H
+
 #include "debugmalloc.h"
 #include "linkedlist.h"
 
@@ -17,15 +20,12 @@ typedef struct Table {
  * Az asztalok betöltését elvégző funkció
  * @param list Az asztal láncolt listájának első elemére mutató pointer
  */
-ListItem *loadTables() {
-    // TODO
-    return NULL;
-}
+ListItem *loadTables();
 
 /**
  * Az asztalok elmentését végző funkció
  * @param list Az asztal láncolt listájának első elemére mutató pointer
  */
-void saveTables(ListItem *list) {
-    // TODO
-}
+void saveTables(ListItem *list);
+
+#endif

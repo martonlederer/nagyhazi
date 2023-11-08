@@ -2,6 +2,7 @@
 #include <stdbool.h>
 #include "debugmalloc.h"
 #include "menu.h"
+#include "table.h"
 
 // forrás: https://gist.github.com/RabaDabaDoba/145049536f815903c79944599c6f952a
 
@@ -27,7 +28,9 @@ void printWelcome() {
            " | ____| |_| |_ ___ _ __ ___ _ __ ___    | || | | |\n"
            " |  _| | __| __/ _ \\ '__/ _ \\ '_ ` _ \\   | || | | |\n"
            " | |___| |_| ||  __/ | |  __/ | | | | |  | || |_| |\n"
-           " |_____|\\__|\\__\\___|_|  \\___|_| |_| |_|  |_(_)___/\n");
+           " |_____|\\__|\\__\\___|_|  \\___|_| |_| |_|  |_(_)___/\n\n");
+
+    printf(REQUEST "Üdvözlöm! " RESET);
 }
 
 /**
@@ -70,19 +73,46 @@ char *readStringLine() {
 /**
  * Elkér a felhasználótól egy új elemet a menüre
  */
-MenuItem requestMenuItem() {
+MenuItem *requestMenuItem() {
     // név
     printf("Étel neve: ");
     char *name = readStringLine();
 
     // ár
-    printf("Ár (Ft - forint): " REQUEST);
+    printf("Ár (Ft - forint): " INPUT);
     int price;
-    scanf("%d", &price);
+    scanf("%d\n", &price);
     printf(RESET);
 
-    return (MenuItem) {
+    MenuItem *menuItem = malloc(sizeof(MenuItem));
+    *menuItem = (MenuItem) {
         name,
         price
     };
+
+    return menuItem;
+}
+
+/**
+ * Elkér a felhasználótól egy új asztalt
+ */
+Table *requestTable() {
+    // hely
+    printf("Elhelyezkedés (x y): " INPUT);
+    int x, y;
+    scanf("%d %d\n", &x, &y);
+    printf(RESET);
+
+    // kapacitás
+    printf("Kapacitás (hány fő fér el): " INPUT);
+    int capacity;
+    scanf("%d\n", &capacity);
+    printf(RESET);
+
+    Table *table = (Table*) malloc(sizeof (Table));
+    *table = (Table) {
+            x, y, capacity, false
+    };
+
+    return table;
 }

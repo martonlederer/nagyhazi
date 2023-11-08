@@ -2,6 +2,7 @@
 #include "linkedlist.h"
 #include "menu.h"
 #include "io.h"
+#include "table.h"
 
 int main(int argc, char **argv) {
     // TODO: init program setup
@@ -10,6 +11,19 @@ int main(int argc, char **argv) {
     // - at least one item on the menu
     // after that
     // - save given data (by default all tables are unoccupied)
+
+    // asztalok betöltése
+    ListItem *tables = loadTables();
+
+    if (tables == NULL) {
+        printWelcome();
+
+        // új asztal megadása
+        printf(REQUEST "Kérem adja meg az étterem min. egy asztalát:\n" RESET);
+        Table *table = requestTable();
+
+        tables = push(tables, table);
+    }
 
     // menü betöltése
     ListItem *menu = loadMenu();
@@ -20,9 +34,9 @@ int main(int argc, char **argv) {
 
         // új menü elem hozzáadása
         printf(REQUEST "Kérem adjon hozzá legalább egy elemet a menühöz:\n" RESET);
-        MenuItem menuItem = requestMenuItem();
+        MenuItem *menuItem = requestMenuItem();
 
-        menu = push(menu, &menuItem);
+        menu = push(menu, menuItem);
         saveMenu(menu);
     }
 

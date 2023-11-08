@@ -5,6 +5,7 @@
 #include <stdbool.h>
 #include "debugmalloc.h"
 #include "menu.h"
+#include "table.h"
 
 // forrás: https://gist.github.com/RabaDabaDoba/145049536f815903c79944599c6f952a
 
@@ -39,6 +40,11 @@ char *readStringLine();
 /**
  * Elkér a felhasználótól egy új elemet a menüre
  */
-MenuItem requestMenuItem();
+MenuItem *requestMenuItem();
+
+/**
+ * Elkér a felhasználótól egy új asztalt
+ */
+Table *requestTable();
 
 #endif
