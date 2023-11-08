@@ -44,6 +44,7 @@ int main(int argc, char **argv) {
 
     // cleanup
     freeMenu(menu);
+    freeList(tables); // TODO: kell külön malloc a *void data értékekre a láncolt listában vagy nem? ha igen (ahogyan most van), akkor azt is fel kell szabadítani az asztaloknál
 
     return 0;
 }
