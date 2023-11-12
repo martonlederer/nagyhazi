@@ -21,22 +21,42 @@ ListItem *loadMenu() {
     while (c != EOF) {
         MenuItem *newItem = (MenuItem*) malloc(sizeof(MenuItem));
 
-        // init név
-        newItem->name = (char*) malloc(sizeof(char));
-        *newItem->name = '\0';
+        char *line = (char*) malloc(sizeof(char));
+        *line = '\0';
 
-        while (scanf("%c", &c) == 1 && c != '\t') {
-            // realloc
-            unsigned long newNameLen = strlen(newItem->name) + 2;
-            newItem->name = (char*) realloc(newItem->name, newNameLen * sizeof(char));
+        // először beolvassuk a sort dinamikusan
+        while (fscanf(f, "%c", &c) == 1 && c != '\n' && c != EOF) {
+            // + 2 kell, mert az strlen nem számolja a lezáró 0-t
+            size_t new_len = strlen(line) + 2;
+            line = (char*) realloc(line, new_len * sizeof(char));
 
-            // karakter hozzáadása
-            newItem->name[newNameLen - 2] = c;
-            newItem->name[newNameLen - 1] = '\0';
+            // az új karakter
+            line[new_len - 2] = c;
+            line[new_len - 1] = '\0';
         }
 
-        // ár beolvasása
-        scanf("%d\n", &newItem->price);
+        // most beolvassuk dinamikusan a nevet is
+        newItem->name = (char*) malloc(sizeof(char));
+        *newItem->name = '\0';
+        char nc = '\0';
+        char *linepos = line;
+
+        while (sscanf(linepos, "%c", &nc) == 1 && nc != '\t') {
+            size_t new_len = strlen(newItem->name) + 2;
+            newItem->name = (char*) realloc(newItem->name, new_len * sizeof(char));
+
+            // karakter hozzáadása
+            newItem->name[new_len - 2] = nc;
+            newItem->name[new_len - 1] = '\0';
+
+            // következő elem
+            linepos += sizeof(char);
+        }
+
+        // ár beolvasása (elcsúsztatjuk eggyel a pointert,
+        // hogy számoljunk a tabulátor karakterrel)
+        sscanf(linepos + sizeof(char), "%d", &newItem->price);
+        free(line);
 
         push(list, newItem);
     }

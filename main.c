@@ -13,7 +13,7 @@ int main(int argc, char **argv) {
     // - save given data (by default all tables are unoccupied)
 
     // asztalok betöltése
-    ListItem *tables = loadTables();
+    /*ListItem *tables = loadTables();
 
     if (tables == NULL) {
         printWelcome();
@@ -23,7 +23,7 @@ int main(int argc, char **argv) {
         Table table = requestTable();
 
         tables = push(tables, &table);
-    }
+    }*/
 
     // menü betöltése
     ListItem *menu = loadMenu();
@@ -44,7 +44,7 @@ int main(int argc, char **argv) {
 
     // cleanup
     freeMenu(menu);
-    freeList(tables);
+    //freeList(tables);
 
     return 0;
 }
