@@ -81,7 +81,7 @@ MenuItem requestMenuItem() {
     // ár
     printf("Ár (Ft - forint): " INPUT);
     int price;
-    scanf("%d\n", &price);
+    scanf("%d", &price);
     printf(RESET);
 
     return (MenuItem) {
@@ -97,13 +97,13 @@ Table requestTable() {
     // hely
     printf("Elhelyezkedés (x y): " INPUT);
     int x, y;
-    scanf("%d %d\n", &x, &y);
+    scanf("%d %d", &x, &y);
     printf(RESET);
 
     // kapacitás
     printf("Kapacitás (hány fő fér el): " INPUT);
     int capacity;
-    scanf("%d\n", &capacity);
+    scanf("%d", &capacity);
     printf(RESET);
 
     return (Table) {

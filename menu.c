@@ -19,8 +19,6 @@ ListItem *loadMenu() {
 
     // elemek beolvasása a láncolt listába a fájlból
     while (c != EOF) {
-        MenuItem *newItem = (MenuItem*) malloc(sizeof(MenuItem));
-
         char *line = (char*) malloc(sizeof(char));
         *line = '\0';
 
@@ -35,6 +33,8 @@ ListItem *loadMenu() {
             line[new_len - 1] = '\0';
         }
 
+        MenuItem *newItem = (MenuItem*) malloc(sizeof(MenuItem));
+
         // most beolvassuk dinamikusan a nevet is
         newItem->name = (char*) malloc(sizeof(char));
         *newItem->name = '\0';
@@ -42,6 +42,7 @@ ListItem *loadMenu() {
         char *linepos = line;
 
         while (sscanf(linepos, "%c", &nc) == 1 && nc != '\t') {
+            printf("%c", nc);
             size_t new_len = strlen(newItem->name) + 2;
             newItem->name = (char*) realloc(newItem->name, new_len * sizeof(char));
 
@@ -52,6 +53,9 @@ ListItem *loadMenu() {
             // következő elem
             linepos += sizeof(char);
         }
+
+        printf(newItem->name);
+        printf(linepos);
 
         // ár beolvasása (elcsúsztatjuk eggyel a pointert,
         // hogy számoljunk a tabulátor karakterrel)

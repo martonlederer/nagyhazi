@@ -88,6 +88,7 @@ void freeList(ListItem *list) {
     while (list != NULL) {
         curr = list;
         list = list->next;
+
         free(curr->data);
         free(curr);
     }
