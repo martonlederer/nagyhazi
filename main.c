@@ -20,9 +20,9 @@ int main(int argc, char **argv) {
 
         // új asztal megadása
         printf(REQUEST "Kérem adja meg az étterem min. egy asztalát:\n" RESET);
-        Table *table = requestTable();
+        Table table = requestTable();
 
-        tables = push(tables, table);
+        tables = push(tables, &table);
     }
 
     // menü betöltése
@@ -34,9 +34,9 @@ int main(int argc, char **argv) {
 
         // új menü elem hozzáadása
         printf(REQUEST "Kérem adjon hozzá legalább egy elemet a menühöz:\n" RESET);
-        MenuItem *menuItem = requestMenuItem();
+        MenuItem menuItem = requestMenuItem();
 
-        menu = push(menu, menuItem);
+        menu = push(menu, &menuItem);
         saveMenu(menu);
     }
 
@@ -44,7 +44,7 @@ int main(int argc, char **argv) {
 
     // cleanup
     freeMenu(menu);
-    freeList(tables); // TODO: kell külön malloc a *void data értékekre a láncolt listában vagy nem? ha igen (ahogyan most van), akkor azt is fel kell szabadítani az asztaloknál
+    freeList(tables);
 
     return 0;
 }

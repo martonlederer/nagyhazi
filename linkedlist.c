@@ -63,6 +63,7 @@ ListItem *pop(ListItem *list, int index) {
             previous->next = current->next;
 
             // felszabadítás
+            free(current->data);
             free(current);
 
             // kilépés a ciklusból
@@ -87,6 +88,7 @@ void freeList(ListItem *list) {
     while (list != NULL) {
         curr = list;
         list = list->next;
+        free(curr->data);
         free(curr);
     }
 }

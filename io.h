@@ -40,11 +40,11 @@ char *readStringLine();
 /**
  * Elkér a felhasználótól egy új elemet a menüre
  */
-MenuItem *requestMenuItem();
+MenuItem requestMenuItem();
 
 /**
  * Elkér a felhasználótól egy új asztalt
  */
-Table *requestTable();
+Table requestTable();
 
 #endif

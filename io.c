@@ -73,7 +73,7 @@ char *readStringLine() {
 /**
  * Elkér a felhasználótól egy új elemet a menüre
  */
-MenuItem *requestMenuItem() {
+MenuItem requestMenuItem() {
     // név
     printf("Étel neve: ");
     char *name = readStringLine();
@@ -84,19 +84,16 @@ MenuItem *requestMenuItem() {
     scanf("%d\n", &price);
     printf(RESET);
 
-    MenuItem *menuItem = malloc(sizeof(MenuItem));
-    *menuItem = (MenuItem) {
+    return (MenuItem) {
         name,
         price
     };
-
-    return menuItem;
 }
 
 /**
  * Elkér a felhasználótól egy új asztalt
  */
-Table *requestTable() {
+Table requestTable() {
     // hely
     printf("Elhelyezkedés (x y): " INPUT);
     int x, y;
@@ -109,10 +106,7 @@ Table *requestTable() {
     scanf("%d\n", &capacity);
     printf(RESET);
 
-    Table *table = (Table*) malloc(sizeof (Table));
-    *table = (Table) {
+    return (Table) {
             x, y, capacity, false
     };
-
-    return table;
 }
