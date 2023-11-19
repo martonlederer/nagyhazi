@@ -17,8 +17,6 @@
 
 #define RESET   "\x1B[0m"
 
-bool welcomePrinted;
-
 /**
  * Kiírja a program nevét
  */
@@ -29,7 +27,7 @@ void printWelcome();
  * @param end Karakter amit már nem szabad beolvasni
  * @return A beolvasott string
  */
-char *readString(char end, int scanner(const char*, ...));
+char *readString(char end);
 
 /**
  * Beolvas egy stringet, dinamikusan a következő sorig

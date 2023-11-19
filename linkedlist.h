@@ -25,7 +25,7 @@ ListItem *push(ListItem *list, void *data);
  * @param index Eltávolítandó elem indexe
  * @return Új láncolt lista head
  */
-ListItem *pop(ListItem *list, int index);
+ListItem *removeItem(ListItem *list, int index);
 
 /**
  * Felszabadítja a lista memóriáját

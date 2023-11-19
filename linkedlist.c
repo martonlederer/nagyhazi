@@ -1,12 +1,5 @@
 #include "debugmalloc.h"
-
-/**
- * Generikus láncolt lista elemének struktúrája
- */
-typedef struct ListItem {
-    void *data;
-    struct ListItem *next;
-} ListItem;
+#include "linkedlist.h"
 
 /**
  * Generikus láncolt lista végéhez ad hozzá egy elemet
@@ -41,7 +34,7 @@ ListItem *push(ListItem *list, void *data) {
  * @param index Eltávolítandó elem indexe
  * @return Új láncolt lista head
  */
-ListItem *pop(ListItem *list, int index) {
+ListItem *removeItem(ListItem *list, int index) {
     // head törlését külön kezeljük
     if (index == 0) {
         ListItem *next = list->next;

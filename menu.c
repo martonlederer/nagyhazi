@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "debugmalloc.h"
 #include "linkedlist.h"
-#include "io.h"
+#include "menu.h"
 
 /**
  * A menü betöltését elvégző funkció
@@ -53,9 +53,6 @@ ListItem *loadMenu() {
             // következő elem
             linepos += sizeof(char);
         }
-
-        printf(newItem->name);
-        printf(linepos);
 
         // ár beolvasása (elcsúsztatjuk eggyel a pointert,
         // hogy számoljunk a tabulátor karakterrel)

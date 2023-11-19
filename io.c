@@ -3,23 +3,14 @@
 #include "debugmalloc.h"
 #include "menu.h"
 #include "table.h"
-
-// forrás: https://gist.github.com/RabaDabaDoba/145049536f815903c79944599c6f952a
-
-#define ERROR   "\x1B[31m"
-#define SUCCESS "\x1B[32m"
-#define REQUEST "\x1B[33m"
-#define INPUT   "\x1B[35m"
-#define BOLD    "\x1B[1m"
-
-#define RESET   "\x1B[0m"
-
-bool welcomePrinted = false;
+#include "io.h"
 
 /**
  * Kiírja a program nevét
  */
 void printWelcome() {
+    static bool welcomePrinted;
+
     if (welcomePrinted) return;
     welcomePrinted = true;
 
