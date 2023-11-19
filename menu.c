@@ -83,7 +83,7 @@ void saveMenu(ListItem *list) {
     ListItem *current = list;
 
     if (f == NULL) {
-        perror("Hiba volt a fájl megnyitása közben.");
+        perror("Hiba volt a menü fájl megnyitása közben.");
         return;
     }
 
