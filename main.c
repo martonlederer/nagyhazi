@@ -52,6 +52,33 @@ int main(int argc, char **argv) {
     // TODO: switch/case for cmd arguments
     // TODO: save tables, menu, orders
 
+    // command mode
+    if (argc > 1) {
+        if (strcmp(argv[1], "nyitasztal") == 0) {
+
+        } else if (strcmp(argv[1], "ujasztal") == 0) {
+
+        } else if (strcmp(argv[1], "asztalterkep") == 0) {
+
+        } else if (strcmp(argv[1], "menu") == 0) {
+
+        } else if (strcmp(argv[1], "ujetel") == 0) {
+
+        } else if (strcmp(argv[1], "toroletel") == 0) {
+
+        } else if (strcmp(argv[1], "rendel") == 0) {
+
+        } else if (strcmp(argv[1], "szamla") == 0) {
+
+        } else {
+            printf(ERROR "Ez a parancs nem létezik (%s).\n" RESET, argv[1]);
+        }
+    }
+    // GUI mode
+    else {
+
+    }
+
     // cleanup
     freeMenu(menu);
     freeList(tables);
