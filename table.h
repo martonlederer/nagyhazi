@@ -1,7 +1,6 @@
 #ifndef NAGYHAZI_TABLE_H
 #define NAGYHAZI_TABLE_H
 
-#include "debugmalloc.h"
 #include "linkedlist.h"
 
 /**

@@ -3,8 +3,13 @@
 #include "menu.h"
 #include "io.h"
 #include "table.h"
+#include "order.h"
 
 int main(int argc, char **argv) {
+    // TODO: LABORON MEGKÉRDEZNI
+    // - miért nincs meg a szorgalmi pontom (pontversenyben látszik, hogy csak egy van meg, kerítés feladat nincs ott)
+    // - debugmallocnál szabad felszabadítani nem lefoglalt helyet?
+
     // TODO: init program setup
     // request initial data:
     // - at least one table with its data
@@ -41,11 +46,16 @@ int main(int argc, char **argv) {
         saveMenu(menu);
     }
 
+    // rendelések betöltése
+    ListItem *orders = loadOrders();
+
     // TODO: switch/case for cmd arguments
+    // TODO: save tables, menu, orders
 
     // cleanup
     freeMenu(menu);
     freeList(tables);
+    freeList(orders);
 
     return 0;
 }

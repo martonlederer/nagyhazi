@@ -14,4 +14,6 @@ add_executable(nagyhazi main.c
         io.c
         io.h
         table.h
+        order.c
+        order.h
 )
