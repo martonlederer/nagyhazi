@@ -81,7 +81,7 @@ ListItem *openTable(int index, ListItem *tableList) {
  * Egy asztalt jelöl meg foglaltnak (nyit meg) vagy szabadnak
  * @param index Az asztal indexe
  * @param tableList Asztal láncolt lista
- * @returns Új asztal lista
+ * @returns Új asztal lista vagy *NULL* hiba esetén
  */
 ListItem *setTableOccupied(int index, ListItem *tableList, bool occupied) {
     // mínusz indexeket nem nézzük
