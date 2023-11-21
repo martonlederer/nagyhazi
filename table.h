@@ -27,4 +27,20 @@ ListItem *loadTables();
  */
 void saveTables(ListItem *list);
 
+/**
+ * Új asztalt nyit vendégek számára
+ * @param index Az asztal indexe
+ * @param tableList Asztal láncolt lista
+ * @returns Új asztal lista
+ */
+ListItem *openTable(int index, ListItem *tableList);
+
+/**
+ * Új asztalt nyit vendégek számára
+ * @param index Az asztal indexe
+ * @param tableList Asztal láncolt lista
+ * @returns Új asztal lista
+ */
+ListItem *setTableOccupied(int index, ListItem *tableList, bool occupied);
+
 #endif

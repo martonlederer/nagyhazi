@@ -1,5 +1,6 @@
 #include "linkedlist.h"
 #include "table.h"
+#include "io.h"
 
 /**
  * Az asztalok betöltését elvégző funkció
@@ -53,4 +54,58 @@ void saveTables(ListItem *list) {
     }
 
     fclose(f);
+}
+
+/**
+ * Új asztalt nyit vendégek számára
+ * @param index Az asztal indexe
+ * @param tableList Asztal láncolt lista
+ * @returns Új asztal lista
+ */
+ListItem *openTable(int index, ListItem *tableList) {
+    ListItem *newList = setTableOccupied(index, tableList, true);
+
+    // hiba a megnyitás során
+    if (newList == NULL) {
+        printf(ERROR "Az asztalt nem lehet megnyitni.\n" RESET);
+        return tableList;
+    }
+
+    // asztal megnyitva
+    printf(SUCCESS "A %d. asztal megnyitva. " RESET "Mostmár lehet hozzá felvenni a rendeléseket.\n", index);
+
+    return newList;
+}
+
+/**
+ * Egy asztalt jelöl meg foglaltnak (nyit meg) vagy szabadnak
+ * @param index Az asztal indexe
+ * @param tableList Asztal láncolt lista
+ * @returns Új asztal lista
+ */
+ListItem *setTableOccupied(int index, ListItem *tableList, bool occupied) {
+    // mínusz indexeket nem nézzük
+    if (index < 0) return NULL;
+
+    // végigmegyünk a listán amíg megtaláljuk az indexet
+    int i = 0;
+    ListItem *curr = tableList;
+
+    while (i != index || curr != NULL) {
+        curr = curr->next;
+        i++;
+    }
+
+    // nem talátuk az asztalt
+    if (curr == NULL) {
+        printf(ERROR "Az asztal nem található.\n" RESET);
+
+        return NULL;
+    }
+
+    // foglalttá tesszük az asztalt
+    Table *table = (Table*) curr->data;
+    table->occupied = occupied;
+
+    return tableList;
 }

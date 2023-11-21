@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include "debugmalloc.h"
 #include "linkedlist.h"
 #include "menu.h"
@@ -28,7 +29,6 @@ int main(int argc, char **argv) {
         Table table = requestTable();
 
         tables = push(tables, &table);
-        saveTables(tables);
     }
 
     // menü betöltése
@@ -43,7 +43,6 @@ int main(int argc, char **argv) {
         MenuItem menuItem = requestMenuItem();
 
         menu = push(menu, &menuItem);
-        saveMenu(menu);
     }
 
     // rendelések betöltése
@@ -54,9 +53,9 @@ int main(int argc, char **argv) {
 
     // command mode
     if (argc > 1) {
-        if (strcmp(argv[1], "nyitasztal") == 0) {
-
-        } else if (strcmp(argv[1], "ujasztal") == 0) {
+        if (strcmp(argv[1], "nyitasztal") == 0)
+            tables = openTable(atoi(argv[2]) - 1, tables);
+        else if (strcmp(argv[1], "ujasztal") == 0) {
 
         } else if (strcmp(argv[1], "asztalterkep") == 0) {
 
@@ -70,14 +69,18 @@ int main(int argc, char **argv) {
 
         } else if (strcmp(argv[1], "szamla") == 0) {
 
-        } else {
+        } else
             printf(ERROR "Ez a parancs nem létezik (%s).\n" RESET, argv[1]);
-        }
     }
     // GUI mode
     else {
 
     }
+
+    // mentés
+    saveTables(tables);
+    saveMenu(menu);
+    saveOrders(orders);
 
     // cleanup
     freeMenu(menu);
