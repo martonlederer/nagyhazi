@@ -57,6 +57,47 @@ void saveTables(ListItem *list) {
 }
 
 /**
+ * Új asztalt ad a meglévő asztalok listájához
+ * @param x Elhelyezkedés X koordináta
+ * @param y Elhelyezkedés Y koordináta
+ * @param capacity Az asztalnál leültethető legtöbb ember száma
+ * @param tableList Asztal láncolt lista
+ * @return Új asztal lista
+ */
+ListItem *newTable(int x, int y, int capacity, ListItem *tableList) {
+    // ellenőrizzük, hogy ezen a helyen nincs-e már egy asztal
+    ListItem *curr = tableList;
+
+    while (curr != NULL) {
+        // hely összehasonlítása
+        Table *table = (Table*) curr->data;
+
+        // ha találunk a helyen asztalt, akkor kiírjuk a hibát
+        // majd visszatérünk az eredeti listával
+        if (table->x == x && table->y == y) {
+            printf(ERROR "Ezen a helyen már van egy asztal.\n" RESET);
+            return tableList;
+        }
+
+        // következő
+        curr = curr->next;
+    }
+
+    // új asztal dinamikus memóriaallokációval
+    Table *newTable = (Table*) malloc(sizeof(Table));
+    *newTable = (Table) {
+        x, y, capacity, false
+    };
+
+    // hozzáadjuk a listához
+    tableList = push(tableList, newTable);
+
+    printf(SUCCESS "Új asztal hozzáadva.\n" RESET);
+
+    return tableList;
+}
+
+/**
  * Új asztalt nyit vendégek számára
  * @param index Az asztal indexe
  * @param tableList Asztal láncolt lista

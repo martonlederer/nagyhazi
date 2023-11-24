@@ -28,6 +28,16 @@ ListItem *loadTables();
 void saveTables(ListItem *list);
 
 /**
+ * Új asztalt ad a meglévő asztalok listájához
+ * @param x Elhelyezkedés X koordináta
+ * @param y Elhelyezkedés Y koordináta
+ * @param capacity Az asztalnál leültethető legtöbb ember száma
+ * @param tableList Asztal láncolt lista
+ * @return Új asztal lista
+ */
+ListItem *newTable(int x, int y, int capacity, ListItem *tableList);
+
+/**
  * Új asztalt nyit vendégek számára
  * @param index Az asztal indexe
  * @param tableList Asztal láncolt lista

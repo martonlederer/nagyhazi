@@ -55,9 +55,14 @@ int main(int argc, char **argv) {
     if (argc > 1) {
         if (strcmp(argv[1], "nyitasztal") == 0)
             tables = openTable(atoi(argv[2]) - 1, tables);
-        else if (strcmp(argv[1], "ujasztal") == 0) {
-
-        } else if (strcmp(argv[1], "asztalterkep") == 0) {
+        else if (strcmp(argv[1], "ujasztal") == 0)
+            tables = newTable(
+                    atoi(argv[3]),
+                    atoi(argv[4]),
+                    atoi(argv[2]),
+                    tables
+            );
+        else if (strcmp(argv[1], "asztalterkep") == 0) {
 
         } else if (strcmp(argv[1], "menu") == 0) {
 
