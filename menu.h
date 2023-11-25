@@ -34,4 +34,10 @@ void saveMenu(ListItem *list);
  */
 void freeMenu(ListItem *list);
 
+/**
+ * Kiírja a menü lista elemeit
+ * @param list Menü láncolt lista
+ */
+void printMenu(ListItem *list);
+
 #endif

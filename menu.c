@@ -2,6 +2,7 @@
 #include "debugmalloc.h"
 #include "linkedlist.h"
 #include "menu.h"
+#include "io.h"
 
 /**
  * A menü betöltését elvégző funkció
@@ -102,6 +103,7 @@ void saveMenu(ListItem *list) {
 
 /**
  * Felszabadítja a menü listát és az ételek neveit
+ * @param list Menü lista
  */
 void freeMenu(ListItem *list) {
     ListItem *current = list;
@@ -117,4 +119,22 @@ void freeMenu(ListItem *list) {
 
     // láncolt lista feszabadítás
     freeList(list);
+}
+
+/**
+ * Kiírja a menü lista elemeit
+ * @param list Menü láncolt lista
+ */
+void printMenu(ListItem *list) {
+    int c = 1;
+
+    while (list != NULL) {
+        // kiírás
+        MenuItem *item = (MenuItem*) list->data;
+        printf(REQUEST "%d" RESET ". %s\t - " REQUEST "%d" RESET " Ft\n", c, item->name, item->price);
+
+        // increment
+        c++;
+        list = list->next;
+    }
 }
