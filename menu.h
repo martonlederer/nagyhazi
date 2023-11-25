@@ -40,4 +40,13 @@ void freeMenu(ListItem *list);
  */
 void printMenu(ListItem *list);
 
+/**
+ * Hozzáad egy új elemet a menühöz
+ * @param name Új étel neve
+ * @param price Új étel ára
+ * @param list Menü láncolt lista
+ * @returns Új menü lista
+ */
+ListItem *newMenuItem(char *name, int price, ListItem *list);
+
 #endif

@@ -59,9 +59,13 @@ int main(int argc, char **argv) {
 
         } else if (strcmp(argv[1], "menu") == 0)
             printMenu(menu);
-        else if (strcmp(argv[1], "ujetel") == 0) {
-
-        } else if (strcmp(argv[1], "toroletel") == 0) {
+        else if (strcmp(argv[1], "ujetel") == 0)
+            menu = newMenuItem(
+                argv[2],
+                atoi(argv[3]),
+                menu
+            );
+        else if (strcmp(argv[1], "toroletel") == 0) {
 
         } else if (strcmp(argv[1], "rendel") == 0) {
 

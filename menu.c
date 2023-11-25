@@ -7,6 +7,7 @@
 /**
  * A menü betöltését elvégző funkció
  * @param list A menü láncolt listájának első elemére mutató pointer
+ * @returns Betöltött menü lista
  */
 ListItem *loadMenu() {
     FILE *f = fopen("./menu.txt", "r");
@@ -137,4 +138,42 @@ void printMenu(ListItem *list) {
         c++;
         list = list->next;
     }
+}
+
+/**
+ * Hozzáad egy új elemet a menühöz
+ * @param name Új étel neve
+ * @param price Új étel ára
+ * @param list Menü láncolt lista
+ * @returns Új menü lista
+ */
+ListItem *newMenuItem(char *name, int price, ListItem *list) {
+    // lefoglaljuk dinamikusan az új elem
+    // memóriáját, hogy később a lista törlő
+    // funkció helyesen kezelje
+    MenuItem *menuItem = (MenuItem*) malloc(sizeof(MenuItem));
+    menuItem->price = price;
+
+    // a nevet bemásoljuk egy dinamikusan lefoglalt stringbe
+    // hogy később a freeMenu() funkció tudja kezelni
+    char *dinName = (char*) malloc(sizeof(char) * (strlen(name) + 1));
+    strcpy(dinName, name);
+
+    menuItem->name = dinName;
+
+    // berakjuk a listába
+    list = push(list, menuItem);
+
+    // sorszám kiírása
+    ListItem *curr = list;
+    int c = 0;
+
+    while (curr != NULL) {
+        curr = curr->next;
+        c++;
+    }
+
+    printf(SUCCESS "Új étel hozzáadva a menühöz %d. sorszámmal.\n" RESET, c);
+
+    return list;
 }
