@@ -4,6 +4,7 @@
 /**
  * A rendelések betöltését elvégző funkció
  * @param list A rendelések láncolt listájának első elemére mutató pointer
+ * @returns A betöltött lista
  */
 ListItem *loadOrders() {
     FILE *f = fopen("./orders.txt", "r");

@@ -18,6 +18,7 @@ typedef struct Table {
 /**
  * Az asztalok betöltését elvégző funkció
  * @param list Az asztal láncolt listájának első elemére mutató pointer
+ * @returns A betöltött lista
  */
 ListItem *loadTables();
 

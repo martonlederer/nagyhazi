@@ -37,11 +37,13 @@ char *readStringLine();
 
 /**
  * Elkér a felhasználótól egy új elemet a menüre
+ * @returns A felhasználó által megadott új étel
  */
 MenuItem *requestMenuItem();
 
 /**
  * Elkér a felhasználótól egy új asztalt
+ * @returns A felhasználó által megadott asztal
  */
 Table *requestTable();
 

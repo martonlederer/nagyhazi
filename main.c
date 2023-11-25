@@ -7,13 +7,6 @@
 #include "order.h"
 
 int main(int argc, char **argv) {
-    // TODO: init program setup
-    // request initial data:
-    // - at least one table with its data
-    // - at least one item on the menu
-    // after that
-    // - save given data (by default all tables are unoccupied)
-
     // asztalok betöltése
     ListItem *tables = loadTables();
 
