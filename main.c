@@ -7,10 +7,6 @@
 #include "order.h"
 
 int main(int argc, char **argv) {
-    // TODO: LABORON MEGKÉRDEZNI
-    // - miért nincs meg a szorgalmi pontom (pontversenyben látszik, hogy csak egy van meg, kerítés feladat nincs ott)
-    // - debugmallocnál szabad felszabadítani nem lefoglalt helyet?
-
     // TODO: init program setup
     // request initial data:
     // - at least one table with its data
@@ -26,9 +22,9 @@ int main(int argc, char **argv) {
 
         // új asztal megadása
         printf(REQUEST "Kérem adja meg az étterem min. egy asztalát:\n" RESET);
-        Table table = requestTable();
+        Table *table = requestTable();
 
-        tables = push(tables, &table);
+        tables = push(tables, table);
     }
 
     // menü betöltése
@@ -40,22 +36,19 @@ int main(int argc, char **argv) {
 
         // új menü elem hozzáadása
         printf(REQUEST "Kérem adjon hozzá legalább egy elemet a menühöz:\n" RESET);
-        MenuItem menuItem = requestMenuItem();
+        MenuItem *menuItem = requestMenuItem();
 
-        menu = push(menu, &menuItem);
+        menu = push(menu, menuItem);
     }
 
     // rendelések betöltése
     ListItem *orders = loadOrders();
 
-    // TODO: switch/case for cmd arguments
-    // TODO: save tables, menu, orders
-
     // command mode
     if (argc > 1) {
-        if (strcmp(argv[1], "nyitasztal") == 0)
+        if (strcmp(argv[1], "nyitasztal") == 0 && verifyArgc(argc, 1))
             tables = openTable(atoi(argv[2]) - 1, tables);
-        else if (strcmp(argv[1], "ujasztal") == 0)
+        else if (strcmp(argv[1], "ujasztal") == 0 && verifyArgc(argc, 3))
             tables = newTable(
                     atoi(argv[3]),
                     atoi(argv[4]),

@@ -15,8 +15,16 @@ ListItem *loadOrders() {
     ListItem *list = NULL;
     Order curr;
 
-    while(fscanf(f, "%d\t%d\n", &curr.food, &curr.table) == 4)
-        list = push(list, &curr);
+    while(fscanf(f, "%d\t%d\n", &curr.food, &curr.table) == 4) {
+        // dinamikusan foglaljuk le, mert a
+        // láncolt lista csak így tudja kezelni
+        // a végén (felszabadítani)
+        Order *order = (Order*) malloc(sizeof(Order));
+        *order = curr;
+
+        // hozzáadjuk a listához
+        list = push(list, order);
+    }
 
     // fájl bezárása
     fclose(f);

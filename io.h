@@ -38,11 +38,20 @@ char *readStringLine();
 /**
  * Elkér a felhasználótól egy új elemet a menüre
  */
-MenuItem requestMenuItem();
+MenuItem *requestMenuItem();
 
 /**
  * Elkér a felhasználótól egy új asztalt
  */
-Table requestTable();
+Table *requestTable();
+
+/**
+ * Ellenőrzi a CLI argumentumokat
+ *
+ * @param argc Arg szám
+ * @param requested Elvárt szám
+ * @return Helyes vagy helytelen az argc
+ */
+bool verifyArgc(int argc, int requested);
 
 #endif

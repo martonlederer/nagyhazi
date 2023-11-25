@@ -64,7 +64,7 @@ char *readStringLine() {
 /**
  * Elkér a felhasználótól egy új elemet a menüre
  */
-MenuItem requestMenuItem() {
+MenuItem *requestMenuItem() {
     // név
     printf("Étel neve: ");
     char *name = readStringLine();
@@ -75,16 +75,22 @@ MenuItem requestMenuItem() {
     scanf("%d", &price);
     printf(RESET);
 
-    return (MenuItem) {
+    // dinamikusan foglaljuk le, mert a
+    // láncolt lista csak így tudja kezelni
+    // a végén (felszabadítani)
+    MenuItem *item = (MenuItem*) malloc(sizeof(MenuItem));
+    *item = (MenuItem) {
         name,
         price
     };
+
+    return item;
 }
 
 /**
  * Elkér a felhasználótól egy új asztalt
  */
-Table requestTable() {
+Table *requestTable() {
     // hely
     printf("Elhelyezkedés (x y): " INPUT);
     int x, y;
@@ -97,7 +103,28 @@ Table requestTable() {
     scanf("%d", &capacity);
     printf(RESET);
 
-    return (Table) {
-            x, y, capacity, false
+    // dinamikusan foglaljuk le, mert a
+    // láncolt lista csak így tudja kezelni
+    // a végén (felszabadítani)
+    Table *table = (Table*) malloc(sizeof(Table));
+    *table = (Table) {
+        x, y, capacity, false
     };
+
+    return table;
+}
+
+/**
+ * Ellenőrzi a CLI argumentumokat
+ *
+ * @param argc Arg szám
+ * @param requested Elvárt szám
+ * @return Helyes vagy helytelen az argc
+ */
+bool verifyArgc(int argc, int requested) {
+    if (argc - 2 == requested)
+        return true;
+
+    printf(ERROR "Ehhez a parancshoz %d argumentum szükséges", requested);
+    return false;
 }

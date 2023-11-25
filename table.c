@@ -21,7 +21,13 @@ ListItem *loadTables() {
         // int -> bool
         curr.occupied = (bool) curr_occupied;
 
-        list = push(list, &curr);
+        // dinamikusan foglaljuk le, mert a
+        // láncolt lista csak így tudja kezelni
+        // a végén (felszabadítani)
+        Table *table = (Table*) malloc(sizeof(Table));
+        *table = curr;
+
+        list = push(list, table);
     }
 
     // fájl bezárása
@@ -147,6 +153,7 @@ ListItem *setTableOccupied(int index, ListItem *tableList, bool occupied) {
     // foglalttá tesszük az asztalt
     Table *table = (Table*) curr->data;
     table->occupied = occupied;
+    printf("%d", table->occupied);
 
     return tableList;
 }
