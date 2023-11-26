@@ -145,7 +145,7 @@ void printMenu(ListItem *list) {
  * @param name Új étel neve
  * @param price Új étel ára
  * @param list Menü láncolt lista
- * @returns Új menü lista
+ * @returns Új menü lista feje
  */
 ListItem *newMenuItem(char *name, int price, ListItem *list) {
     // lefoglaljuk dinamikusan az új elem
@@ -174,6 +174,22 @@ ListItem *newMenuItem(char *name, int price, ListItem *list) {
     }
 
     printf(SUCCESS "Új étel hozzáadva a menühöz %d. sorszámmal.\n" RESET, c);
+
+    return list;
+}
+
+/**
+ * Töröl a menüröl egy elemet
+ * @param index Az elem indexe (1-től számolva, ahogyan a felhasználó megadja)
+ * @param list A menü láncolt lista
+ * @return Új menü lista feje
+ */
+ListItem *removeMenuItem(int index, ListItem *list) {
+    // kiszedjük az elemet
+    list = removeItem(list, index - 1);
+
+    // kiírjuk, hogy törlésre került
+    printf(ERROR "%d. elem törölve a menüből." RESET, index);
 
     return list;
 }

@@ -49,4 +49,12 @@ void printMenu(ListItem *list);
  */
 ListItem *newMenuItem(char *name, int price, ListItem *list);
 
+/**
+ * Töröl a menüröl egy elemet
+ * @param index Az elem indexe (1-től számolva, ahogyan a felhasználó megadja)
+ * @param list A menü láncolt lista
+ * @return Új menü lista feje
+ */
+ListItem *removeMenuItem(int index, ListItem *list);
+
 #endif
