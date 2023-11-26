@@ -204,7 +204,7 @@ BillResult issueBill(
         free(space);
 
         // töröljük a rendelést
-        removeItem(orderList, order_i);
+        orderList = removeItem(orderList, order_i);
 
         // következő
         curr_order = curr_order->next;
@@ -212,8 +212,8 @@ BillResult issueBill(
     }
 
     // kiírjuk a teljes árat
-    char *space = equalSpace(strlen("Összesen:") + istrlen(total) + 2, 40);
-    printf("---\nÖsszesen: %s " REQUEST "%d\n" RESET, space, total);
+    char *space = equalSpace(istrlen(total) + 13, 40);
+    printf("---\nÖsszesen: %s " REQUEST "%d Ft\n" RESET, space, total);
 
     free(space);
 
