@@ -92,10 +92,18 @@ int main(int argc, char **argv) {
         // a felhasználó választ a menüpontok közül
         int selectedMenu = showAndChooseMenu();
 
-        // kilépés
-        if (selectedMenu != 9) {
+        // kezeljük a kiválasztott menüpontot
+        GuiHandleResult guiRes = handleMenu(
+            selectedMenu,
+            menu,
+            tables,
+            orders
+        );
 
-        }
+        // az eredménnyel frissítünk
+        menu = guiRes.menuList;
+        tables = guiRes.tableList;
+        orders = guiRes.orderList;
     }
 
     // mentés

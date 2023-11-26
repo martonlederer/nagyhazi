@@ -45,7 +45,7 @@ ListItem *orderNewItem(
 );
 
 /**
- * Asztal és rendelés láncolst listák
+ * Asztal és rendelés láncolt listák
  * összetett struktúrája. Az ilyen típusú
  * változókban két pointer található, melyek
  * láncolt listák fejére mutatnak. Csak számla
