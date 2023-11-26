@@ -219,6 +219,7 @@ BillResult issueBill(
 
     // lezárjuk az asztalt
     res.tableList = setTableOccupied(tableIndex, tableList, false);
+    res.orderList = orderList;
 
     return res;
 }
