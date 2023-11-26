@@ -50,9 +50,9 @@ int main(int argc, char **argv) {
             );
         else if (strcmp(argv[1], "asztalterkep") == 0)
             printTableMap(tables);
-        else if (strcmp(argv[1], "menu") == 0) {
-            //printMenu(menu);
-        }else if (strcmp(argv[1], "ujetel") == 0 && verifyArgc(argc, 2))
+        else if (strcmp(argv[1], "menu") == 0)
+            printMenu(menu);
+        else if (strcmp(argv[1], "ujetel") == 0 && verifyArgc(argc, 2))
             menu = newMenuItem(
                 argv[2],
                 atoi(argv[3]),
@@ -91,12 +91,6 @@ int main(int argc, char **argv) {
 
     }
 
-    ListItem  *curr = tables;
-    printf("%s", curr == NULL ? "yes" : "no");
-    while (curr != NULL) {
-        printf("%d %d\n", ((Table*) curr->data)->x, ((Table*) curr->data)->y);
-    }
-    printf("fff");
     // mentés
     saveTables(tables);
     saveMenu(menu);
