@@ -130,3 +130,47 @@ bool verifyArgc(int argc, int requested) {
     printf(ERROR "Ehhez a parancshoz %d argumentum szükséges", requested);
     return false;
 }
+
+/**
+ * Készít egy szóközökből álló stringet, amivel
+ * ugyan annyi helyet lehet kihagyni a konzolban
+ * stringek között. A visszatért pointert később
+ * fel kell szabadítani.
+ * @param strlen A konzolban megjelenő többi string hossza együtt
+ * @param linelen A sor teljes hossza, a szóköz karakterekkel együtt
+ * @return Szóközökből álló string
+ */
+char *equalSpace(unsigned long strlen, unsigned long linelen) {
+    // ennyiszer kell ismételni a szóköz karaktert
+    unsigned long spaceCount = linelen - strlen;
+
+    // létrehozzuk a stringet
+    char *str = (char*) malloc(sizeof(char) * (spaceCount + 1));
+    *str = '\0';
+
+    while (spaceCount > 0) {
+        strcat(str, " ");
+        spaceCount--;
+    }
+
+    return str;
+}
+
+/**
+ * Kiszámolja egy integer stringbe convertált hosszúságát
+ * @param num Az integer
+ * @return Hossz
+ */
+size_t istrlen(int num) {
+    size_t len = 0;
+
+    // nullát külön kell kezelni
+    if (num == 0) len = 1;
+
+    while (num > 0) {
+        len++;
+        num /= 10;
+    }
+
+    return len;
+}

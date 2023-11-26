@@ -143,5 +143,82 @@ BillResult issueBill(
     ListItem *tableList,
     ListItem *orderList
 ) {
+    // eredmény változó, amit később frissítünk, ha
+    // bármelyik láncolt listán változtatunk
+    BillResult res;
+    res.tableList = tableList;
+    res.orderList = orderList;
 
+    // megkeressük az asztalt
+    ListItem *tableItem = getItemByIndex(tableList, tableIndex);
+
+    // nem találtuk meg az asztalt
+    if (tableItem == NULL) {
+        printf(ERROR "Nem található asztal ezzel az index-szel: %d.\n" RESET, tableIndex);
+        return res;
+    }
+
+    // ha nem foglalt az asztal, akkor
+    // nincsen megnyitva, így nem lehet felvenni
+    // a rendelést
+    Table *table = (Table*) tableItem->data;
+
+    if (!table->occupied) {
+        printf(ERROR "Ez az asztal még nincsen megnyitva. Nem lehet számlát generálni..\n" RESET);
+        return res;
+    }
+
+    // számla kiírása
+    printf("Számla:\n\n");
+
+    // összesen mennyibe került
+    int total = 0;
+    int order_i = 0;
+    ListItem *curr_order = orderList;
+
+    while (curr_order != NULL) {
+        Order *order = (Order*) curr_order->data;
+
+        // ha nem ehhez az asztalhoz tartozik az elem, továbbmegyünk
+        if (order->table != tableIndex) {
+            curr_order = curr_order->next;
+            order_i++;
+
+            continue;
+        }
+
+        // megkeressük az ételt a menün
+        ListItem *menuItem = getItemByIndex(menuList, order->food);
+        MenuItem *item = (MenuItem*) menuItem->data;
+
+        // hozzáadjuk a teljes összeghez
+        total += item->price;
+
+        // hely kihagyása a név és az ár között
+        char *space = equalSpace(strlen(item->name) + istrlen(item->price), 40);
+
+        // kiírjuk
+        printf("%s %s " REQUEST "%d" RESET " Ft\n", item->name, space, item->price);
+
+        // hely string felszabadítása
+        free(space);
+
+        // töröljük a rendelést
+        removeItem(orderList, order_i);
+
+        // következő
+        curr_order = curr_order->next;
+        order_i++;
+    }
+
+    // kiírjuk a teljes árat
+    char *space = equalSpace(strlen("Összesen:") + istrlen(total) + 2, 40);
+    printf("---\nÖsszesen: %s " REQUEST "%d\n" RESET, space, total);
+
+    free(space);
+
+    // lezárjuk az asztalt
+    res.tableList = setTableOccupied(tableIndex, tableList, false);
+
+    return res;
 }

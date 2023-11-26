@@ -56,4 +56,22 @@ Table *requestTable();
  */
 bool verifyArgc(int argc, int requested);
 
+/**
+ * Készít egy szóközökből álló stringet, amivel
+ * ugyan annyi helyet lehet kihagyni a konzolban
+ * stringek között. A visszatért pointert később
+ * fel kell szabadítani.
+ * @param strlen A konzolban megjelenő többi string hossza együtt
+ * @param linelen A sor teljes hossza, a szóköz karakterekkel együtt
+ * @return Szóközökből álló string
+ */
+char *equalSpace(unsigned long strlen, unsigned long linelen);
+
+/**
+ * Kiszámolja egy integer stringbe convertált hosszúságát
+ * @param num Az integer
+ * @return Hossz
+ */
+size_t istrlen(int num);
+
 #endif

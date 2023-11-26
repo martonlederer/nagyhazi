@@ -130,9 +130,16 @@ void printMenu(ListItem *list) {
     int c = 1;
 
     while (list != NULL) {
-        // kiírás
         MenuItem *item = (MenuItem*) list->data;
-        printf(REQUEST "%d" RESET ". %s\t - " REQUEST "%d" RESET " Ft\n", c, item->name, item->price);
+
+        // hely kihagyása a név és az ár között
+        char *space = equalSpace(strlen(item->name) + istrlen(item->price), 40);
+
+        // kiírjuk az elemet
+        printf(REQUEST "%d" RESET ". %s %s - " REQUEST "%d" RESET " Ft\n", c, item->name, space, item->price);
+
+        // felszabadítjuk a helykihagyó stringet
+        free(space);
 
         // increment
         c++;

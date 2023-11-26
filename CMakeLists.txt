@@ -8,7 +8,6 @@ set(CMAKE_CXX_FLAGS "${CXXFLAGS}")
 
 add_executable(nagyhazi main.c
         menu.c
-        commands.c
         table.c
         gui.c
         menu.h

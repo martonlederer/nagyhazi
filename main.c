@@ -49,7 +49,7 @@ int main(int argc, char **argv) {
                     tables
             );
         else if (strcmp(argv[1], "asztalterkep") == 0) {
-
+            // TODO
         } else if (strcmp(argv[1], "menu") == 0)
             printMenu(menu);
         else if (strcmp(argv[1], "ujetel") == 0)
