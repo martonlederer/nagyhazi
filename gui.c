@@ -90,4 +90,12 @@ GuiHandleResult handleMenu(
         default:
             printf(ERROR "A menüpont nem található.\n" RESET);
     }
+
+    // frissítjük az eredmény változó pointereit
+    res.menuList = menuList;
+    res.tableList = tableList;
+    res.orderList = orderList;
+
+    // visszatérés
+    return res;
 }
