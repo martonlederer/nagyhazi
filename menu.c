@@ -211,10 +211,10 @@ ListItem *removeMenuItem(int index, ListItem *list) {
     }
 
     // kiszedjük az elemet
-    list = removeItem(list, index - 1);
+    list = removeItem(list, index);
 
     // kiírjuk, hogy törlésre került
-    printf(ERROR "%d. elem törölve a menüből.\n" RESET, index);
+    printf(ERROR "%d. elem törölve a menüből.\n" RESET, index + 1);
 
     return list;
 }

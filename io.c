@@ -127,7 +127,7 @@ bool verifyArgc(int argc, int requested) {
     if (argc - 2 == requested)
         return true;
 
-    printf(ERROR "Ehhez a parancshoz %d argumentum szükséges", requested);
+    printf(ERROR "Ehhez a parancshoz %d argumentum szükséges.\n", requested);
     return false;
 }
 
