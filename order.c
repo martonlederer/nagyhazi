@@ -17,7 +17,7 @@ ListItem *loadOrders() {
     ListItem *list = NULL;
     Order curr;
 
-    while(fscanf(f, "%d\t%d\n", &curr.food, &curr.table) == 4) {
+    while(fscanf(f, "%d\t%d\n", &curr.food, &curr.table) == 2) {
         // dinamikusan foglaljuk le, mert a
         // láncolt lista csak így tudja kezelni
         // a végén (felszabadítani)
@@ -116,7 +116,7 @@ ListItem *orderNewItem(
     };
 
     // berakjuk a rendelést a listába
-    push(orderList, order);
+    orderList = push(orderList, order);
 
     // kiírjuk, hogy a rendelés sikeres volt
     MenuItem *food = (MenuItem*) menuItem->data;
