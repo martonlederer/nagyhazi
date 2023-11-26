@@ -120,7 +120,7 @@ ListItem *openTable(int index, ListItem *tableList) {
     }
 
     // asztal megnyitva
-    printf(SUCCESS "A %d. asztal megnyitva. " RESET "Mostmár lehet hozzá felvenni a rendeléseket.\n", index);
+    printf(SUCCESS "A %d. asztal megnyitva. " RESET "Mostmár lehet hozzá felvenni a rendeléseket.\n", index + 1);
 
     return newList;
 }

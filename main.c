@@ -52,29 +52,29 @@ int main(int argc, char **argv) {
             // TODO
         } else if (strcmp(argv[1], "menu") == 0)
             printMenu(menu);
-        else if (strcmp(argv[1], "ujetel") == 0)
+        else if (strcmp(argv[1], "ujetel") == 0 && verifyArgc(argc, 2))
             menu = newMenuItem(
                 argv[2],
                 atoi(argv[3]),
                 menu
             );
-        else if (strcmp(argv[1], "toroletel") == 0)
+        else if (strcmp(argv[1], "toroletel") == 0 && verifyArgc(argc, 1))
             menu = removeMenuItem(
-                atoi(argv[2]),
+                atoi(argv[2]) - 1,
                 menu
             );
-        else if (strcmp(argv[1], "rendel") == 0)
+        else if (strcmp(argv[1], "rendel") == 0 && verifyArgc(argc, 2))
             orders = orderNewItem(
-                atoi(argv[2]),
-                atoi(argv[3]),
+                atoi(argv[2]) - 1,
+                atoi(argv[3]) - 1,
                 menu,
                 tables,
                 orders
             );
-        else if (strcmp(argv[1], "szamla") == 0) {
+        else if (strcmp(argv[1], "szamla") == 0 && verifyArgc(argc, 1)) {
             // legeneráljuk a számlát
             BillResult billRes = issueBill(
-                atoi(argv[2]),
+                atoi(argv[2]) - 1,
                 menu,
                 tables,
                 orders

@@ -82,7 +82,7 @@ ListItem *orderNewItem(
     // ha a menu_curr iterátor NULL pointer, akkor
     // az index alatt nem található étel
     if (menuItem == NULL) {
-        printf(ERROR "Nem található étel ezzel az index-szel: %d.\n" RESET, menuItemIndex);
+        printf(ERROR "Nem található étel ezzel az index-szel: %d.\n" RESET, menuItemIndex + 1);
         return orderList;
     }
 
@@ -92,7 +92,7 @@ ListItem *orderNewItem(
     // hasonlóan az előzőhöz, a NULL ptr azt jelenti,
     // hogy nem létezik az asztal
     if (tableItem == NULL) {
-        printf(ERROR "Nem található asztal ezzel az index-szel: %d.\n" RESET, tableIndex);
+        printf(ERROR "Nem található asztal ezzel az index-szel: %d.\n" RESET, tableIndex + 1);
         return orderList;
     }
 
@@ -154,7 +154,7 @@ BillResult issueBill(
 
     // nem találtuk meg az asztalt
     if (tableItem == NULL) {
-        printf(ERROR "Nem található asztal ezzel az index-szel: %d.\n" RESET, tableIndex);
+        printf(ERROR "Nem található asztal ezzel az index-szel: %d.\n" RESET, tableIndex + 1);
         return res;
     }
 
