@@ -43,4 +43,11 @@ void freeList(ListItem *list);
  */
 ListItem *getItemByIndex(ListItem *list, int index);
 
+/**
+ * Megszámolja, hogy milyen hosszú az adott láncolt lista
+ * @param list Láncolt lista, amit meg kell számolni
+ * @return Lista hossza
+ */
+size_t getListLength(ListItem *list);
+
 #endif

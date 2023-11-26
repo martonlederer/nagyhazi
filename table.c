@@ -153,3 +153,101 @@ ListItem *setTableOccupied(int index, ListItem *tableList, bool occupied) {
 
     return tableList;
 }
+
+/**
+ * Kinyomtatja az étterem asztalainak térképét
+ * @param tableList Asztal láncolt lista
+ */
+void printTableMap(ListItem *tableList) {
+    // megszámoljuk az asztalokat és átmásoljuk őket egy
+    // dinamikus tömbbe, sorrend szerint
+    size_t tablecount = getListLength(tableList);
+    Table *rawTables = (Table*) malloc(sizeof(Table) * tablecount);
+
+    // másolás
+    int i = 0;
+
+    while (tableList != NULL) {
+        // az elem, amit most másolunk majd át
+        Table *toCopy = (Table*) tableList->data;
+
+        // iterátor
+        ListItem *curr = tableList;
+        int tableIndex = 0;
+
+        // megtaláljuk, hogy melyik elem következik
+        while (curr != NULL) {
+            // ha kisebb, mint az eddig kiválasztott asztal
+            // akkor átírjuk az aktuálisra
+            Table *table = (Table*) curr->data;
+
+            if (table->y < toCopy->y || (table->y == toCopy->y && table->x < toCopy->x)) {
+                toCopy = table;
+            }
+
+            // következő
+            curr = curr->next;
+            tableIndex++;
+        }
+
+        // másoljuk az elemet
+        rawTables[i] = *toCopy;
+
+        // kiszedjük az elemet a listából
+        tableList = removeItem(tableList, tableIndex - 1);
+
+        // következő
+        i++;
+    }
+
+    size_t j = 0;
+
+    // kiírás
+    while (j < tablecount) {
+        // hány darab asztal van a sorban
+        int countOfLine = 0;
+
+        for (size_t k = j; k < tablecount; k++) {
+            if (rawTables[k].y != rawTables[j].y)
+                break;
+
+            printf(rawTables[k].occupied ? ERROR : SUCCESS);
+            printf("+---------+ " RESET);
+            countOfLine++;
+        }
+
+        printf("\n");
+
+        // grafika
+        for (int k = 0; k < countOfLine; k++) {
+            int tableNumber = (int) j + k + 1;
+            char *spaces = equalSpace(istrlen(tableNumber) + 1, 9);
+
+            printf(rawTables[j + k].occupied ? ERROR : SUCCESS);
+            printf("|%d.%s| " RESET, tableNumber, spaces);
+            free(spaces);
+        }
+
+        printf("\n");
+
+        for (int k = 0; k < countOfLine; k++) {
+            printf(rawTables[j + k].occupied ? ERROR : SUCCESS);
+            printf("|%s| " RESET, rawTables[j + k].occupied ? "(foglalt)" : "(szabad) ");
+        }
+
+        printf("\n");
+
+        for (int k = 0; k < countOfLine; k++) {
+            printf(rawTables[j + k].occupied ? ERROR : SUCCESS);
+            printf("+---------+ " RESET);
+        }
+
+        printf("\n");
+
+        // következő
+        j += countOfLine;
+    }
+
+    // felszabadítjuk a dinamikus tömböt
+    free(rawTables);
+}

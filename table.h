@@ -54,4 +54,10 @@ ListItem *openTable(int index, ListItem *tableList);
  */
 ListItem *setTableOccupied(int index, ListItem *tableList, bool occupied);
 
+/**
+ * Kinyomtatja az étterem asztalainak térképét
+ * @param tableList Asztal láncolt lista
+ */
+void printTableMap(ListItem *tableList);
+
 #endif

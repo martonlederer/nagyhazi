@@ -49,7 +49,7 @@ ListItem *removeItem(ListItem *list, int index) {
     ListItem *current = list->next;
     ListItem *previous = list;
 
-    while (current->next != NULL && j <= index) {
+    while (current != NULL && j <= index) {
         // megtaláljuk az elemet
         if (index == j) {
             // előző linkelése a következőhöz
@@ -119,4 +119,22 @@ ListItem *getItemByIndex(ListItem *list, int index) {
     // visszaadjuk a megtalált értéket
     // (ez akár NULL is lehet)
     return list;
+}
+
+/**
+ * Megszámolja, hogy milyen hosszú az adott láncolt lista
+ * @param list Láncolt lista, amit meg kell számolni
+ * @return Lista hossza
+ */
+size_t getListLength(ListItem *list) {
+    // számoló
+    size_t c = 0;
+
+    // végigmegyünk a listán
+    while (list != NULL) {
+        c++;
+        list = list->next;
+    }
+
+    return c;
 }
