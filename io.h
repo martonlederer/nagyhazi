@@ -1,5 +1,5 @@
-#ifndef NAGYHAZI_IO_H
-#define NAGYHAZI_IO_H
+#ifndef ETTEREM_IO_H
+#define ETTEREM_IO_H
 
 #include <stdio.h>
 #include <stdbool.h>

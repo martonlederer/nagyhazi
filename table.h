@@ -1,5 +1,5 @@
-#ifndef NAGYHAZI_TABLE_H
-#define NAGYHAZI_TABLE_H
+#ifndef ETTEREM_TABLE_H
+#define ETTEREM_TABLE_H
 
 #include "linkedlist.h"
 

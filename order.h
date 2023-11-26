@@ -1,5 +1,5 @@
-#ifndef NAGYHAZI_ORDER_H
-#define NAGYHAZI_ORDER_H
+#ifndef ETTEREM_ORDER_H
+#define ETTEREM_ORDER_H
 
 #include "linkedlist.h"
 #include "io.h"

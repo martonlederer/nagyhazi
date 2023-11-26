@@ -2,8 +2,8 @@
 // Created by Marton Lederer on 01/11/2023.
 //
 
-#ifndef NAGYHAZI_MENU_H
-#define NAGYHAZI_MENU_H
+#ifndef ETTEREM_MENU_H
+#define ETTEREM_MENU_H
 
 #include <stdio.h>
 #include "debugmalloc.h"

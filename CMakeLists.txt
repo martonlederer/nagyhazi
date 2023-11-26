@@ -1,12 +1,12 @@
 cmake_minimum_required(VERSION 3.26)
-project(nagyhazi C)
+project(etterem C)
 
 set(CMAKE_C_STANDARD 11)
 
 set(CXXFLAGS  "-Wall -Werror")
 set(CMAKE_CXX_FLAGS "${CXXFLAGS}")
 
-add_executable(nagyhazi main.c
+add_executable(etterem main.c
         menu.c
         table.c
         gui.c

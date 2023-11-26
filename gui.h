@@ -1,5 +1,5 @@
-#ifndef NAGYHAZI_GUI_H
-#define NAGYHAZI_GUI_H
+#ifndef ETTEREM_GUI_H
+#define ETTEREM_GUI_H
 
 #include <stdio.h>
 #include "io.h"

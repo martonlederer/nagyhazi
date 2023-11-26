@@ -1,5 +1,5 @@
-#ifndef NAGYHAZI_LINKEDLIST_H
-#define NAGYHAZI_LINKEDLIST_H
+#ifndef ETTEREM_LINKEDLIST_H
+#define ETTEREM_LINKEDLIST_H
 
 #include "debugmalloc.h"
 
