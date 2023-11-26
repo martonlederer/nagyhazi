@@ -5,6 +5,7 @@
 #include "io.h"
 #include "table.h"
 #include "order.h"
+#include "gui.h"
 
 int main(int argc, char **argv) {
     // asztalok betöltése
@@ -88,7 +89,13 @@ int main(int argc, char **argv) {
     }
     // GUI mode
     else {
+        // a felhasználó választ a menüpontok közül
+        int selectedMenu = showAndChooseMenu();
 
+        // kilépés
+        if (selectedMenu != 9) {
+
+        }
     }
 
     // mentés

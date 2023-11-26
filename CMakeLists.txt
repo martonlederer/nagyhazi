@@ -18,4 +18,5 @@ add_executable(nagyhazi main.c
         table.h
         order.c
         order.h
+        gui.h
 )
