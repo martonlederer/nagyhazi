@@ -192,6 +192,24 @@ ListItem *newMenuItem(char *name, int price, ListItem *list) {
  * @return Új menü lista feje
  */
 ListItem *removeMenuItem(int index, ListItem *list) {
+    // felszabadítjuk az elem nevét
+    ListItem *curr = list;
+    int i = 0;
+
+    while (curr != NULL) {
+        if (i == index) {
+            // megtaláltuk az elemet, itt felszabadítjuk a nevét
+            MenuItem *item = (MenuItem*) curr->data;
+            free(item->name);
+
+            break;
+        }
+
+        // következő
+        i++;
+        curr = curr->next;
+    }
+
     // kiszedjük az elemet
     list = removeItem(list, index - 1);
 
