@@ -173,7 +173,6 @@ BillResult issueBill(
 
     // összesen mennyibe került
     int total = 0;
-    int order_i = 0;
     ListItem *curr_order = orderList;
 
     while (curr_order != NULL) {
@@ -182,7 +181,6 @@ BillResult issueBill(
         // ha nem ehhez az asztalhoz tartozik az elem, továbbmegyünk
         if (order->table != tableIndex) {
             curr_order = curr_order->next;
-            order_i++;
 
             continue;
         }
@@ -203,19 +201,39 @@ BillResult issueBill(
         // hely string felszabadítása
         free(space);
 
-        // töröljük a rendelést
-        orderList = removeItem(orderList, order_i);
-
         // következő
         curr_order = curr_order->next;
-        order_i++;
     }
 
     // kiírjuk a teljes árat
     char *space = equalSpace(istrlen(total) + 13, 40);
-    printf("---\nÖsszesen: %s " REQUEST "%d Ft\n" RESET, space, total);
+    printf("---\nÖsszesen: %s " REQUEST "%d" RESET " Ft\n", space, total);
 
     free(space);
+
+    // külön töröljük a rendeléseket
+    curr_order = orderList;
+    ListItem *previous_order = NULL;
+
+    while (curr_order != NULL) {
+        ListItem *next = curr_order->next;
+        Order *order = (Order*) curr_order->data;
+
+        // itt nem használhatjuk a "removeItem" funkciót
+        // mert az akár új indexet is oszthat a lista
+        // összes elemének, így itt helyben kell kivenni
+        // az elemet a listából
+        if (order->table != tableIndex || previous_order == NULL)
+            previous_order = curr_order;
+
+        if (order->table == tableIndex) {
+            previous_order->next = next;
+            free(order);
+            free(curr_order);
+        }
+
+        curr_order = next;
+    }
 
     // lezárjuk az asztalt
     res.tableList = setTableOccupied(tableIndex, tableList, false);
