@@ -106,8 +106,8 @@ GuiHandleResult handleMenu(
 
             // új rendelés
             orderList = orderNewItem(
-                menuIndex,
-                tableIndex,
+                menuIndex - 1,
+                tableIndex - 1,
                 menuList,
                 tableList,
                 orderList
@@ -122,7 +122,7 @@ GuiHandleResult handleMenu(
 
             // számlázás
             BillResult billRes = issueBill(
-                tableIndex,
+                tableIndex - 1,
                 menuList,
                 tableList,
                 orderList
@@ -167,7 +167,7 @@ GuiHandleResult handleMenu(
             scanf("%d", &index);
 
             // kiszedjük a menü listából
-            menuList = removeMenuItem(index, menuList);
+            menuList = removeMenuItem(index - 1, menuList);
         } break;
 
         case 8: {
