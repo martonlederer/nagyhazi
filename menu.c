@@ -189,7 +189,7 @@ ListItem *removeMenuItem(int index, ListItem *list) {
     list = removeItem(list, index - 1);
 
     // kiírjuk, hogy törlésre került
-    printf(ERROR "%d. elem törölve a menüből." RESET, index);
+    printf(ERROR "%d. elem törölve a menüből.\n" RESET, index);
 
     return list;
 }

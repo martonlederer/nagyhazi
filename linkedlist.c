@@ -86,3 +86,37 @@ void freeList(ListItem *list) {
         free(curr);
     }
 }
+
+/**
+ * Visszaad egy elemet a láncolt listából az
+ * indexe alapján.
+ * @param list Láncolst lista
+ * @param index Elem indexe
+ * @return Az elemre mutató pointer (vagy NULL
+ * pointer, ha az elem nem található)
+ */
+ListItem *getItemByIndex(ListItem *list, int index) {
+    // 0 index alatt az elem nem létezik
+    if (index < 0)
+        return NULL;
+
+    // iterátor
+    int i = 0;
+
+    // a list változó mindig az aktuális elem lesz a
+    // láncolt listában
+    while (list != NULL) {
+        // ha megtaláljuk az indexet, kimegyünk a loop-ból
+        if (i == index)
+            break;
+
+        // következő elem
+        list = list->next;
+        // index növelése
+        i++;
+    }
+
+    // visszaadjuk a megtalált értéket
+    // (ez akár NULL is lehet)
+    return list;
+}

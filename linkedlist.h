@@ -33,4 +33,14 @@ ListItem *removeItem(ListItem *list, int index);
  */
 void freeList(ListItem *list);
 
+/**
+ * Visszaad egy elemet a láncolt listából az
+ * indexe alapján.
+ * @param list Láncolst lista
+ * @param index Elem indexe
+ * @return Az elemre mutató pointer (vagy NULL
+ * pointer, ha az elem nem található)
+ */
+ListItem *getItemByIndex(ListItem *list, int index);
+
 #endif

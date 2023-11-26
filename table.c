@@ -132,29 +132,24 @@ ListItem *openTable(int index, ListItem *tableList) {
  * @returns Új asztal lista vagy *NULL* hiba esetén
  */
 ListItem *setTableOccupied(int index, ListItem *tableList, bool occupied) {
-    // mínusz indexeket nem nézzük
-    if (index < 0) return NULL;
+    // megkeressük az asztalt
+    ListItem *tableItem = getItemByIndex(tableList, index);
 
-    // végigmegyünk a listán amíg megtaláljuk az indexet
-    int i = 0;
-    ListItem *curr = tableList;
-
-    while (i != index || curr != NULL) {
-        curr = curr->next;
-        i++;
-    }
-
-    // nem talátuk az asztalt
-    if (curr == NULL) {
+    // nem találtuk az asztalt
+    if (tableItem == NULL) {
         printf(ERROR "Az asztal nem található.\n" RESET);
 
         return NULL;
     }
 
-    // foglalttá tesszük az asztalt
-    Table *table = (Table*) curr->data;
+    Table *table = (Table*) tableItem->data;
+
+    // megnézzük, hogy az asztal állapota már be van e állítva
+    if (table->occupied == occupied)
+        return NULL;
+
+    // foglaltság beállítása
     table->occupied = occupied;
-    printf("%d", table->occupied);
 
     return tableList;
 }

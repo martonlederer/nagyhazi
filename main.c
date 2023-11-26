@@ -64,7 +64,13 @@ int main(int argc, char **argv) {
                 menu
             );
         else if (strcmp(argv[1], "rendel") == 0) {
-
+            orders = orderNewItem(
+                    atoi(argv[2]),
+                    atoi(argv[3]),
+                    menu,
+                    tables,
+                    orders
+            );
         } else if (strcmp(argv[1], "szamla") == 0) {
 
         } else
