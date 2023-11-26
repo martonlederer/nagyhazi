@@ -50,6 +50,32 @@ int showAndChooseMenu() {
 }
 
 /**
+ * Elkéri a felhasználótól egy asztal számát
+ * @return Asztal indexe
+ */
+int getTableIndex() {
+    int tableIndex;
+
+    printf("Az asztal száma: ");
+    scanf("%d", &tableIndex);
+
+    return tableIndex - 1;
+}
+
+/**
+ * Elkéri a felhasználótól egy menün szereplő étel számát
+ * @return Menü elem indexe
+ */
+int getMenuItemIndex() {
+    int menuIndex;
+
+    printf("Az étel menün szereplő száma: ");
+    scanf("%d", &menuIndex);
+
+    return menuIndex - 1;
+}
+
+/**
  * Kezeli a kiválasztott menüpontot, meghívja a
  * hozzá tartozó segédfunkciókat, kiírja és bekéri
  * a szükséges adatokat.
@@ -86,28 +112,21 @@ GuiHandleResult handleMenu(
     switch (selected) {
         case 1: {
             // beolvassuk az asztal számát
-            printf("Az asztal száma: ");
-            int tableIndex;
-            scanf("%d", &tableIndex);
+            int tableIndex = getTableIndex();
 
             // asztal megnyitása
-            tableList = openTable(tableIndex - 1, tableList);
+            tableList = openTable(tableIndex, tableList);
         } break;
 
         case 2: {
             // menü elem és asztal számának beolvasása
-            printf("Az étel menün szereplő száma: ");
-            int menuIndex;
-            scanf("%d", &menuIndex);
-
-            printf("Az asztal száma: ");
-            int tableIndex;
-            scanf("%d", &tableIndex);
+            int menuIndex = getMenuItemIndex();
+            int tableIndex = getTableIndex();
 
             // új rendelés
             orderList = orderNewItem(
-                menuIndex - 1,
-                tableIndex - 1,
+                menuIndex,
+                tableIndex,
                 menuList,
                 tableList,
                 orderList
@@ -116,13 +135,11 @@ GuiHandleResult handleMenu(
 
         case 3: {
             // asztal számának beolvasása
-            printf("Az asztal száma: ");
-            int tableIndex;
-            scanf("%d", &tableIndex);
+            int tableIndex = getTableIndex();
 
             // számlázás
             BillResult billRes = issueBill(
-                tableIndex - 1,
+                tableIndex,
                 menuList,
                 tableList,
                 orderList
@@ -162,12 +179,10 @@ GuiHandleResult handleMenu(
 
         case 7: {
             // beolvassuk a menü elem indexét
-            printf("Étel száma a menün: ");
-            int index;
-            scanf("%d", &index);
+            int menuIndex = getMenuItemIndex();
 
             // kiszedjük a menü listából
-            menuList = removeMenuItem(index - 1, menuList);
+            menuList = removeMenuItem(menuIndex, menuList);
         } break;
 
         case 8: {
