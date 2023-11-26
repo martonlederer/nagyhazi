@@ -13,7 +13,6 @@
 #define SUCCESS "\x1B[32m"
 #define REQUEST "\x1B[33m"
 #define INPUT   "\x1B[35m"
-#define BOLD    "\x1B[1m"
 
 #define RESET   "\x1B[0m"
 
