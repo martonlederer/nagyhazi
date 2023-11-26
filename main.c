@@ -63,16 +63,26 @@ int main(int argc, char **argv) {
                 atoi(argv[2]),
                 menu
             );
-        else if (strcmp(argv[1], "rendel") == 0) {
+        else if (strcmp(argv[1], "rendel") == 0)
             orders = orderNewItem(
-                    atoi(argv[2]),
-                    atoi(argv[3]),
-                    menu,
-                    tables,
-                    orders
+                atoi(argv[2]),
+                atoi(argv[3]),
+                menu,
+                tables,
+                orders
             );
-        } else if (strcmp(argv[1], "szamla") == 0) {
+        else if (strcmp(argv[1], "szamla") == 0) {
+            // legeneráljuk a számlát
+            BillResult billRes = issueBill(
+                atoi(argv[2]),
+                menu,
+                tables,
+                orders
+            );
 
+            // frissítjük a listákat
+            tables = billRes.tableList;
+            orders = billRes.orderList;
         } else
             printf(ERROR "Ez a parancs nem létezik (%s).\n" RESET, argv[1]);
     }

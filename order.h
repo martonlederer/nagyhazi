@@ -44,4 +44,39 @@ ListItem *orderNewItem(
         ListItem *orderList
 );
 
+/**
+ * Asztal és rendelés láncolst listák
+ * összetett struktúrája. Az ilyen típusú
+ * változókban két pointer található, melyek
+ * láncolt listák fejére mutatnak. Csak számla
+ * kiállításához szükséges.
+ */
+typedef struct BillResult {
+    /**
+     * Az asztal láncolt lista fejére mutató pointer
+     */
+    ListItem *tableList;
+    /**
+     * A rendelés láncolt lista fejére mutató pointer
+     */
+    ListItem *orderList;
+} BillResult;
+
+/**
+ * Számla generálása, kiírása és asztal lezárása. A funkció
+ * törli az összes rendelést az asztalhoz a számlázás után
+ * @param tableIndex Az asztal indexe
+ * @param menuList Menü láncolt lista
+ * @param tableList Asztal láncolt lista
+ * @param orderList Rendelés láncolt lista
+ * @return Új rendelés- és asztal láncolt listák fejei egy
+ * a összetett belőlük összetett struktúrában.
+ */
+BillResult issueBill(
+        int tableIndex,
+        ListItem *menuList,
+        ListItem *tableList,
+        ListItem *orderList
+);
+
 #endif

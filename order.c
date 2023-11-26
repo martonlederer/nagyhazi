@@ -126,3 +126,22 @@ ListItem *orderNewItem(
     // visszaadjuk a listát
     return orderList;
 }
+
+/**
+ * Számla generálása, kiírása és asztal lezárása. A funkció
+ * törli az összes rendelést az asztalhoz a számlázás után
+ * @param tableIndex Az asztal indexe
+ * @param menuList Menü láncolt lista
+ * @param tableList Asztal láncolt lista
+ * @param orderList Rendelés láncolt lista
+ * @return Új rendelés- és asztal láncolt listák fejei egy
+ * a összetett belőlük összetett struktúrában.
+ */
+BillResult issueBill(
+    int tableIndex,
+    ListItem *menuList,
+    ListItem *tableList,
+    ListItem *orderList
+) {
+
+}
