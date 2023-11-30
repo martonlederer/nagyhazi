@@ -37,13 +37,7 @@ int showAndChooseMenu() {
     // választott opció beolvasása
     printf(REQUEST "\n");
     int selected;
-
-    // ellenőrzés
-    if (scanf("%d", &selected) != 1 || selected > 9 || selected < 1) {
-        printf(ERROR "Nem létező menüpont lett kiválasztva.\n" RESET);
-        return showAndChooseMenu();
-    }
-
+    scanf("%d", &selected);
     printf(RESET);
 
     return selected;
@@ -104,7 +98,8 @@ GuiHandleResult handleMenu(
         return res;
 
     // választott menü kiírása
-    printf(REQUEST "%s:\n" RESET, menus[selected - 1]);
+    if (selected >= 1 && selected <= 8)
+        printf(REQUEST "%s:\n" RESET, menus[selected - 1]);
 
     // a különböző esetekhez szükséges a kapcsos zárójelekkel
     // való blokkokra bontás, hogy újra lehessen deklarálni
