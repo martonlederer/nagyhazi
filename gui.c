@@ -163,6 +163,10 @@ GuiHandleResult handleMenu(
         case 6: {
             // beolvassuk a nevet és az árat
             printf("Új étel neve: ");
+            // empty scanf
+            char _;
+            scanf("%c", &_);
+
             char *name = readStringLine();
 
             printf("Új étel ára: ");
@@ -175,6 +179,9 @@ GuiHandleResult handleMenu(
                 price,
                 menuList
             );
+
+            // felszabadítjuk a din nevet, hiszen azt már lemásoltuk
+            free(name);
         } break;
 
         case 7: {

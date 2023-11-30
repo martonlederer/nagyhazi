@@ -229,6 +229,7 @@ BillResult issueBill(
         if (order->table == tableIndex) {
             previous_order->next = next;
             free(order);
+            // ezt valamiért nem szabadítja fel a debugmalloc
             free(curr_order);
         }
 
