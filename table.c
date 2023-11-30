@@ -162,92 +162,63 @@ void printTableMap(ListItem *tableList) {
     // megszámoljuk az asztalokat és átmásoljuk őket egy
     // dinamikus tömbbe, sorrend szerint
     size_t tablecount = getListLength(tableList);
-    Table *rawTables = (Table*) malloc(sizeof(Table) * tablecount);
+    size_t i = 0;
+    ListItem *curr = tableList;
+    int y = 0;
 
-    // másolás
-    int i = 0;
+    while (i < tablecount) {
+        for (int j = 0; j < 4; j++) {
+            curr = tableList;
+            int localCount = 0;
 
-    while (tableList != NULL) {
-        // az elem, amit most másolunk majd át
-        Table *toCopy = (Table*) tableList->data;
+            while (curr != NULL) {
+                // aktuális asztal
+                Table *currTable = (Table *) curr->data;
 
-        // iterátor
-        ListItem *curr = tableList;
-        int tableIndex = 0;
+                // csak az aktuális sort írjuk ki
+                if (currTable->y != y) {
+                    curr = curr->next;
+                    continue;
+                }
 
-        // megtaláljuk, hogy melyik elem következik
-        while (curr != NULL) {
-            // ha kisebb, mint az eddig kiválasztott asztal
-            // akkor átírjuk az aktuálisra
-            Table *table = (Table*) curr->data;
+                printf(currTable->occupied ? ERROR : SUCCESS);
 
-            if (table->y < toCopy->y || (table->y == toCopy->y && table->x < toCopy->x)) {
-                toCopy = table;
+                switch (j) {
+                    case 3:
+                    case 0:
+                        printf("+---------+ ");
+                        break;
+
+                    case 1: {
+                        size_t tableNum = localCount + 1 + i;
+                        char *spaces = equalSpace(istrlen((int) tableNum) + 1, 9);
+
+                        printf("|%d.%s| " RESET, (int) tableNum, spaces);
+                        free(spaces);
+                    } break;
+
+                    case 2:
+                        printf("|%s| " RESET, currTable->occupied ? "(foglalt)" : "(szabad) ");
+                    break;
+
+                    default:
+                        break;
+                }
+
+                printf(RESET);
+
+                // következő
+                curr = curr->next;
+                localCount++;
             }
 
-            // következő
-            curr = curr->next;
-            tableIndex++;
+            if (localCount > 0) printf("\n");
+            else break;
+
+            if (j == 3)
+                i += localCount;
         }
 
-        // másoljuk az elemet
-        rawTables[i] = *toCopy;
-
-        // kiszedjük az elemet a listából
-        tableList = removeItem(tableList, tableIndex - 1);
-
-        // következő
-        i++;
+        y++;
     }
-
-    size_t j = 0;
-
-    // kiírás
-    while (j < tablecount) {
-        // hány darab asztal van a sorban
-        int countOfLine = 0;
-
-        for (size_t k = j; k < tablecount; k++) {
-            if (rawTables[k].y != rawTables[j].y)
-                break;
-
-            printf(rawTables[k].occupied ? ERROR : SUCCESS);
-            printf("+---------+ " RESET);
-            countOfLine++;
-        }
-
-        printf("\n");
-
-        // grafika
-        for (int k = 0; k < countOfLine; k++) {
-            int tableNumber = (int) j + k + 1;
-            char *spaces = equalSpace(istrlen(tableNumber) + 1, 9);
-
-            printf(rawTables[j + k].occupied ? ERROR : SUCCESS);
-            printf("|%d.%s| " RESET, tableNumber, spaces);
-            free(spaces);
-        }
-
-        printf("\n");
-
-        for (int k = 0; k < countOfLine; k++) {
-            printf(rawTables[j + k].occupied ? ERROR : SUCCESS);
-            printf("|%s| " RESET, rawTables[j + k].occupied ? "(foglalt)" : "(szabad) ");
-        }
-
-        printf("\n");
-
-        for (int k = 0; k < countOfLine; k++) {
-            printf(rawTables[j + k].occupied ? ERROR : SUCCESS);
-            printf("+---------+ " RESET);
-        }
-
-        printf("\n");
-
-        // következő
-        j += countOfLine;
-    }
-
-    // felszabadítjuk a dinamikus tömböt
-    free(rawTables);
 }
