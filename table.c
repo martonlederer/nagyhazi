@@ -167,9 +167,15 @@ void printTableMap(ListItem *tableList) {
     int y = 0;
 
     while (i < tablecount) {
+        // i előző értéke
+        // ahhoz kell, hogy lássuk, hogy volt e asztal
+        // ebben a sorban
+        size_t previ = i;
+
         for (int j = 0; j < 4; j++) {
             curr = tableList;
             int localCount = 0;
+            int lastX = 0;
 
             while (curr != NULL) {
                 // aktuális asztal
@@ -179,6 +185,10 @@ void printTableMap(ListItem *tableList) {
                 if (currTable->y != y) {
                     curr = curr->next;
                     continue;
+                }
+
+                for (int k = lastX; k < currTable->x - 1; k++) {
+                    printf("            ");
                 }
 
                 printf(currTable->occupied ? ERROR : SUCCESS);
@@ -208,6 +218,7 @@ void printTableMap(ListItem *tableList) {
                 printf(RESET);
 
                 // következő
+                lastX = currTable->x;
                 curr = curr->next;
                 localCount++;
             }
@@ -218,6 +229,12 @@ void printTableMap(ListItem *tableList) {
             if (j == 3)
                 i += localCount;
         }
+
+        printf("\n");
+
+        // ha nem volt asztal, akkor üres sor
+        if (i == previ && i != 0)
+            printf("\n\n\n\n");
 
         y++;
     }

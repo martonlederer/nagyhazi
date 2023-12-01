@@ -240,5 +240,8 @@ BillResult issueBill(
     res.tableList = setTableOccupied(tableIndex, tableList, false);
     res.orderList = orderList;
 
+    if (res.orderList->data == NULL)
+        res.orderList = NULL;
+
     return res;
 }
