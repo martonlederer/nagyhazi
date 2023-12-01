@@ -240,6 +240,7 @@ BillResult issueBill(
     res.tableList = setTableOccupied(tableIndex, tableList, false);
     res.orderList = orderList;
 
+    // edge case, ahogyan megbeszélve a laboron
     if (res.orderList->data == NULL)
         res.orderList = NULL;
 
