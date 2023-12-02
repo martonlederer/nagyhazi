@@ -228,8 +228,14 @@ BillResult issueBill(
 
         if (order->table == tableIndex) {
             previous_order->next = next;
+
+            // ha az első elemet töröljük, akkor az orderList-et
+            // is módosítani kell
+            if (orderList == curr_order)
+                orderList = next;
+
+            // felszabadítás
             free(order);
-            // ezt valamiért nem szabadítja fel a debugmalloc
             free(curr_order);
         }
 
@@ -239,10 +245,6 @@ BillResult issueBill(
     // lezárjuk az asztalt
     res.tableList = setTableOccupied(tableIndex, tableList, false);
     res.orderList = orderList;
-
-    // edge case, ahogyan megbeszélve a laboron
-    if (res.orderList->data == NULL)
-        res.orderList = NULL;
 
     return res;
 }
